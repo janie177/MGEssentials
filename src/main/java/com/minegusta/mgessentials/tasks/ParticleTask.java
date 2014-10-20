@@ -18,10 +18,11 @@ public class ParticleTask
                 for(Player p : TempData.effectMap.keySet())
                 {
                     Effect theEffect = TempData.effectMap.get(p);
-                    if (theEffect != null)p.getWorld().spigot().playEffect(p.getLocation(), theEffect, 0, 0, 1F, 0.1F, 1F, 0.5F, 3, 30);
+                    if (theEffect != null)
+                        p.getWorld().spigot().playEffect(p.getLocation(), theEffect, 0, 0, 1F, 0.1F, 1F, 0.5F, 9, 30);
                     else TempData.effectMap.remove(p);
                 }
             }
-        }, 0, 20);
+        }, 0, 10);
     }
 }
