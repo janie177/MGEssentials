@@ -1,9 +1,6 @@
 package com.minegusta.mgessentials.listener;
 
-import com.google.common.collect.Lists;
-import com.minegusta.mgessentials.command.EffectCommand;
 import org.bukkit.ChatColor;
-import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -13,10 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.List;
 import java.util.Random;
 
 public class PlayerListener implements Listener {
