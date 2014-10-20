@@ -1,0 +1,218 @@
+name: MGEssentials
+main: com.minegusta.mgessentials.Main
+version: ${project.version}
+author: janie177
+commands:
+   explode:
+      description: Make someone go boom.
+      usage: /explode player
+      permission: minegusta.explode
+      permission-message: You don't have permission to use this. Now die in a corner.
+   pop:
+      description: Popperde-pop-pop.
+      usage: /pop
+      permission: minegusta.pop
+      permission-message: You don't have permission to use this. Now die in a corner.
+
+   roll:
+      description: Roll a random number. Numbers are between 1 and 50.
+      usage: /roll
+      permission: minegusta.roll
+      permission-message: You don't have permission to use this. Now die in a corner.
+   rape:
+      description: Rape someone. -s for STD's. -v for violent.
+      usage: /Rape <name> [-s] [-v]
+      permission: minegusta.rape
+      permission-message: You don't have permission to use this. Now die in a corner.
+   nuke:
+      description: Kim-Jong-un style.
+      usage: /nuke player
+      permission: minegusta.nuke
+      permission-message: You don't have permission to use this. Now die in a corner.
+   fart:
+      description: Fart.
+      usage: /fart
+      permission: minegusta.fart
+      permission-message: You don't have permission to use this. Now die in a corner.
+   disco:
+      description: Hail the great DrD1sco!
+      usage: /disco
+      permission: minegusta.disco
+      permission-message: You don't have permission to use this. Now die in a corner.
+   nukearrow:
+      description: Toggle nuke arrows.
+      usage: /NukeArrow
+      permission: nukearrow.use
+      permission-message: You don't have permission to use this. Now die in a corner.
+   speedy:
+      default: op
+      description:
+      usage: /speed
+      permission: potioncommand.speed
+      permission-message: This command is for donators only. Please consider donating.
+   regen:
+      default: op
+      description:
+      usage: /regen
+      permission: potioncommand.regen
+      permission-message: This command is for donators only. Please consider donating.
+   haste:
+      default: op
+      description:
+      usage: /haste
+      permission: potioncommand.haste
+      permission-message: This command is for donators only. Please consider donating.
+   strength:
+      default: op
+      description:
+      usage: /strength
+      permission: potioncommand.strength
+      permission-message: This command is for donators only. Please consider donating.
+   fireResistance:
+      default: op
+      description:
+      usage: /fireresistance
+      permission: potioncommand.fireresistance
+      permission-message: This command is for donators only. Please consider donating.
+   invisibility:
+      default: op
+      description:
+      usage: /invisibility
+      permission: potioncommand.invisibility
+      permission-message: This command is for donators only. Please consider donating.
+   jump:
+      default: op
+      description:
+      usage: /jump
+      permission: potioncommand.jump
+      permission-message: This command is for donators only. Please consider donating.
+   nightvision:
+      default: op
+      description:
+      usage: /nightvision
+      permission: potioncommand.nightvision
+      permission-message: This command is for donators only. Please consider donating.
+   hug:
+      default: true
+      description:
+      usage: /hug name
+      permission: minegusta.hug
+      permission-message: You do not have permission to hug. Sowwy :c You must feel lonewly.
+   highfive:
+      default: false
+      description: People who give high-fives are cooler than people who do not
+      usage: /highfive Name
+      permission: minegusta.highfive
+      permission-message: You do not have permission to highfive. Sowwy :c You must feel lonewly.
+   kiss:
+      default: true
+      description: MMMMMMMMMMMMMMMM Riveting
+      usage: /kiss <name>
+      permission-message: awww you can't kiss ;c maybe practise on some dolls?
+   swag:
+      default: true
+      description: No.
+      aliases: [yolo]
+      usage: Kill yourself.
+      permission-message: No.
+   desc:
+      description: Changes an items description.
+      usage: /Desc <Description>
+      permission: minegusta.donator
+      permission-message: You don't have permission to use this. Now die in a corner.
+   rename:
+      description: Rename the item in your hand.
+      usage: /Rename <New name>
+      permission: minegusta.rename
+      permission-message: You don't have permission to use this. Now die in a corner.
+   mausmute:
+      description: Mute someone like a maus.
+      usage: /MausMute <Name>
+      permission: minegusta.mute
+      permission-message: You don't have permission to use this. Now die in a corner.
+   mausunmute:
+      description: UnMute someone like a maus.
+      usage: /MausUnMute <Name>
+      permission: minegusta.mute
+      permission-message: You don't have permission to use this. Now die in a corner.
+   particle:
+      description: Spark like edward in the sun.
+      usage: /particle
+      aliases: [particles, effects]
+      permission: minegusta.particles
+      permission-message: You don't have permission to use this. Now die in a corner.
+   poke:
+      description: Poke someone.
+      usage: /poke <name> <object>
+      default: true
+      permission-message: In sovjet Minegusta, console poke you!!
+   votepoints:
+      description: Command for voting plugin to give a mystery box.
+      usage: /votepoints <add/reset> <name>
+      default: op
+      permission-message: You cannot use this command! It is console only.
+   vote:
+      description: Point system for voting plugins.
+      usage: /vote
+      aliases: [redeem, reward]
+      default: true
+      permission-message: Redeem vote rewards.
+   color:
+      description: Show color codes.
+      usage: /color
+      aliases: [colors, colorcodes]
+      default: true
+      permission-message: You can't use this somehow.
+   hail:
+      description: Hail Plankton!
+      usage: /Hail <something>
+      aliases: [heil, obey]
+      default: false
+      permission-message: You cannot use this. Go be a nazi somewhere else.
+
+permissions:
+   minegusta.hug:
+     description: hug people
+     default: op
+   minegusta.mute:
+     description: mute people
+     default: op
+   minegusta.explode:
+     description: explode someone
+     default: op
+   minegusta.pop:
+     description: popper the pop
+     default: op
+   minegusta.roll:
+     description: Roll a random number between 1 and 50
+     default: op
+   minegusta.nuke:
+     description: NUKEEEEEE
+     default: op
+   minegusta.fart:
+     description: Fart on yourself. U lil shit.
+     default: op
+   minegusta.nukearrow:
+     description: NUKE THEM SHIZZLE
+     default: op
+   minegusta.highfive:
+     description: Highfive people
+     default: op
+   minegusta.kiss:
+     description: Kiss people
+     default: op
+   minegusta.desc:
+     description: Descriptions for items
+     default: op
+   minegusta.rename:
+     description: Rename items
+     default: op
+   minegusta.particle:
+     description: Particles
+     default: op
+   minegusta.rape:
+     description: raaaaaaaaaape whistle
+     default: op
+   minegusta.donator:
+     description: Is a player a donator?
+     default: op
