@@ -33,6 +33,7 @@ public enum Commands {
     C31("votepoints", new VotePointsCommand()),
     C32("vote", new VoteRedeemCommand()),
     C33("color", new ColorCommand()),
+    C54("joinsound", new JoinSoundCommand()),
     C34("hail", new HailCommand());
 
 

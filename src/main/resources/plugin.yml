@@ -169,6 +169,13 @@ commands:
       aliases: [heil, obey]
       default: false
       permission-message: You cannot use this. Go be a nazi somewhere else.
+   joinsound:
+      description: Hail Plankton!
+      usage: /JS Set
+      aliases: [js]
+      default: false
+      permission: minegusta.joinsound
+      permission-message: You cannot use this. Go cri.
 
 permissions:
    minegusta.hug:
@@ -215,4 +222,7 @@ permissions:
      default: op
    minegusta.donator:
      description: Is a player a donator?
+     default: op
+   minegusta.joinsound:
+     description: Can this player set joinsounds?
      default: op

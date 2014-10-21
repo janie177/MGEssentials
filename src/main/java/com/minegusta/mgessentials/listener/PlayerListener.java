@@ -1,5 +1,6 @@
 package com.minegusta.mgessentials.listener;
 
+import com.minegusta.mgessentials.joinsound.JoinSoundManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
@@ -10,11 +11,24 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class PlayerListener implements Listener {
+
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onLogIn(PlayerJoinEvent e) {
+        UUID uuid = e.getPlayer().getUniqueId();
+        if (JoinSoundManager.hasJoinSound(uuid)) {
+            JoinSoundManager.playSound(uuid);
+            e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', JoinSoundManager.getMessage(uuid)));
+        }
+
+    }
 
 
     //Cancel placing Mystery Boxes

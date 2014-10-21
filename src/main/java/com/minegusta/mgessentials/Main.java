@@ -1,5 +1,6 @@
 package com.minegusta.mgessentials;
 
+import com.minegusta.mgessentials.joinsound.JoinSoundManager;
 import com.minegusta.mgessentials.tasks.ParticleTask;
 import com.minegusta.mgessentials.tasks.SaveTask;
 import com.minegusta.mgessentials.votepoints.VotePointsDataManager;
@@ -29,6 +30,9 @@ public class Main extends JavaPlugin {
         //Load the vote points file.
         VotePointsDataManager.createOrLoadPointsFile(PLUGIN);
 
+        //Load the joinsound file
+        JoinSoundManager.createOrLoadPointsFile(PLUGIN);
+
         //Start the save task
         SAVETASK = SaveTask.startTask();
 
@@ -36,10 +40,12 @@ public class Main extends JavaPlugin {
         PARTICLETASK = ParticleTask.start();
     }
 
-    public void onDisable()
-    {
+    public void onDisable() {
         //Save the votepoints file
         VotePointsDataManager.save();
+
+        //Save the joinsound file
+        JoinSoundManager.save();
 
         //Stop the save task
         Bukkit.getScheduler().cancelTask(SAVETASK);
