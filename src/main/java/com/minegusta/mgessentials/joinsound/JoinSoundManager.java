@@ -1,6 +1,7 @@
 package com.minegusta.mgessentials.joinsound;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -47,8 +48,10 @@ public class JoinSoundManager {
     }
 
     public static String getMessage(UUID p) {
+
         String[] parts = conf.getString(p.toString()).split("%and%");
-        return parts[0];
+        return ChatColor.translateAlternateColorCodes('&', parts[0]);
+
     }
 
     public static void playSound(UUID p) {
@@ -61,8 +64,7 @@ public class JoinSoundManager {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.playSound(player.getLocation(), sound, pitch, volume);
             }
-        }
-        removeSound(p);
+        } else removeSound(p);
     }
 
     public static void removeSound(UUID p) {

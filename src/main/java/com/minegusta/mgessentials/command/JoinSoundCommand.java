@@ -15,39 +15,51 @@ public class JoinSoundCommand implements CommandExecutor {
     public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
         if (!s.isOp() && !s.hasPermission("minegusta.joinsound")) return false;
         if (args.length > 0) {
-            if (args[0].equalsIgnoreCase("set")) {
+            if (args[0].equalsIgnoreCase("set") && args.length == 6) {
                 Player p;
                 float volume;
                 float pitch;
                 String message;
                 Sound sound;
                 try {
-                    message = ChatColor.translateAlternateColorCodes('&', args[1].replace("_", " "));
-                    p = Bukkit.getPlayer(args[2]);
+                    message = args[2].replace("_", " ").replace("%and%", "||");
+                    p = Bukkit.getPlayer(args[1]);
                     pitch = Float.parseFloat(args[5]);
                     volume = Float.parseFloat(args[4]);
-                    sound = Sound.valueOf(args[3]);
+                    sound = Sound.valueOf(args[3].toUpperCase());
 
                 } catch (Exception ignored) {
                     s.sendMessage(ChatColor.DARK_RED + "Something was wrong with your input!");
-                    sendHelp(s);
+                    return true;
+                }
+                if (sound == null) {
+                    s.sendMessage(ChatColor.RED + "That sound is not real!");
+                    return true;
+                }
+                if (p == null) {
+                    s.sendMessage(ChatColor.RED + "That player is not real!");
+                    return true;
+                }
+                if (message == null) {
+                    s.sendMessage(ChatColor.RED + "That message is not in the right format it seems.");
                     return true;
                 }
                 JoinSoundManager.setSound(p.getUniqueId(), message, sound, volume, pitch);
+                s.sendMessage(ChatColor.GREEN + "You set " + p.getName() + "'s JoinSound!");
                 return true;
 
             }
-            if (args[0].equalsIgnoreCase("remove")) {
+            if (args[0].equalsIgnoreCase("remove") && args.length == 2) {
                 Player p;
                 try {
-                    p = Bukkit.getPlayer(args[2]);
+                    p = Bukkit.getPlayer(args[1]);
 
                 } catch (Exception ignored) {
-                    s.sendMessage(ChatColor.DARK_RED + "Something was wrong with your input!");
-                    sendHelp(s);
+                    s.sendMessage(ChatColor.DARK_RED + "That player appears not to exist!");
                     return true;
                 }
                 JoinSoundManager.removeSound(p.getUniqueId());
+                s.sendMessage(ChatColor.GREEN + "You removed a JoinSound!");
                 return true;
             }
         }
@@ -55,14 +67,20 @@ public class JoinSoundCommand implements CommandExecutor {
         return true;
     }
 
+    private String[] help = {"To set a JoinSound, use the following format:",
+            ChatColor.RED + "/JS Set <Player> <Message> <Sound> <Volume> <Pitch>",
+            "Ex: " + ChatColor.RED + "/JS Set janie177 &2Jan_Is_Blind PIG_IDLE 1 1",
+            ChatColor.GRAY + "The player has to be online for this to work.",
+            "To remove a join sound use:",
+            ChatColor.RED + "/JS Remove <Player>",
+            "A list of sounds can be found here:",
+            ChatColor.LIGHT_PURPLE + "http://jd.bukkit.org/beta/apidocs/org/bukkit/Sound.html"};
+
     private void sendHelp(CommandSender s) {
-        s.sendMessage(ChatColor.YELLOW + "You tried to edit a JoinSound but failed epicly!");
-        s.sendMessage(ChatColor.YELLOW + "To set a joinsound, use the following format:");
-        s.sendMessage(ChatColor.RED + "/JS Set <Player> <Message_With_Underscores> <Sound> <Volume> <Pitch>");
-        s.sendMessage(ChatColor.YELLOW + "Ex:" + ChatColor.RED + "/JS Set janie177 &2Jan_Is_A_Noob PIG_IDLE 1 1");
-        s.sendMessage(ChatColor.YELLOW + "To remove a join sound use:");
-        s.sendMessage(ChatColor.RED + "/JnS Remove <Player>");
-        s.sendMessage(ChatColor.YELLOW + "A list of sounds can be found here:");
-        s.sendMessage(ChatColor.LIGHT_PURPLE + "http://jd.bukkit.org/beta/apidocs/org/bukkit/Sound.html");
+        s.sendMessage(ChatColor.DARK_RED + " - - - " + ChatColor.LIGHT_PURPLE + "Join Sound" + ChatColor.DARK_RED + " - - - ");
+
+        for (String string : help) {
+            s.sendMessage(ChatColor.YELLOW + "[" + ChatColor.LIGHT_PURPLE + "MG" + ChatColor.YELLOW + "] " + ChatColor.DARK_PURPLE + string);
+        }
     }
 }

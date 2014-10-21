@@ -20,9 +20,11 @@ import java.util.UUID;
 public class PlayerListener implements Listener {
 
 
+    //JoinSounds
     @EventHandler(priority = EventPriority.LOWEST)
     public void onLogIn(PlayerJoinEvent e) {
         UUID uuid = e.getPlayer().getUniqueId();
+
         if (JoinSoundManager.hasJoinSound(uuid)) {
             JoinSoundManager.playSound(uuid);
             e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', JoinSoundManager.getMessage(uuid)));
