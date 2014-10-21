@@ -2,6 +2,7 @@ package com.minegusta.mgessentials.listener;
 
 
 import com.minegusta.mgessentials.command.MuteCommand;
+import com.minegusta.mgessentials.data.TempData;
 import com.minegusta.mgessentials.util.RainBowStringMaker;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -21,9 +22,13 @@ public class ChatListener implements Listener {
             e.getPlayer().sendMessage(ChatColor.RED + "You are muted. This will be undone when a moderator undoes it or at a server reboot. (9AM GMT).");
             e.getPlayer().sendMessage(ChatColor.GREEN + "Muted for a false reason? Visit: " + ChatColor.AQUA + "http://forum.minegusta.com/");
         }
+        if (TempData.massMute && !e.getPlayer().hasPermission("minegusta.massmute.exempt")) {
+            e.getPlayer().sendMessage(ChatColor.RED + "The server is in muted mode! Only staff can talk.");
+            e.setCancelled(true);
+        }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOW)
     public void onRainbowChat(AsyncPlayerChatEvent e) {
         String m = e.getMessage();
         if (m.contains("&!") && e.getPlayer().hasPermission("minegusta.donator")) {
@@ -46,11 +51,14 @@ public class ChatListener implements Listener {
                 e.getPlayer().sendMessage(ChatColor.RED + "You are muted. This will be undone when a moderator undoes it or at a server reboot. (9AM GMT).");
                 e.getPlayer().sendMessage(ChatColor.GREEN + "Muted for a false reason? Visit: " + ChatColor.AQUA + "http://forum.minegusta.com/");
             }
-        } else if (e.getMessage().toLowerCase().startsWith("/")) {
-            if (e.getPlayer().isOp()) {
-                if (e.getMessage().contains("119") || e.getMessage().toLowerCase().contains("portal")) {
-                    e.setCancelled(true);
-                }
+        }
+        if (TempData.massMute && !e.getPlayer().hasPermission("minegusta.massmute.exempt")) {
+            String message = e.getMessage();
+            message = message.substring(1);
+            String[] args = message.split("\\s+");
+            if (args[0].equalsIgnoreCase("hail") || args[0].equalsIgnoreCase("highfive") || args[0].equalsIgnoreCase("nuke") || args[0].equalsIgnoreCase("slap") || args[0].equalsIgnoreCase("me") || args[0].equalsIgnoreCase("bukkit") || args[0].equalsIgnoreCase("name") || args[0].equalsIgnoreCase("create")) {
+                e.getPlayer().sendMessage(ChatColor.RED + "The server is in muted mode! Only staff can talk.");
+                e.setCancelled(true);
             }
         }
     }

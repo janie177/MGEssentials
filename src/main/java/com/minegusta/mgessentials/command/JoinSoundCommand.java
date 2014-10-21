@@ -25,7 +25,13 @@ public class JoinSoundCommand implements CommandExecutor {
                     message = args[2].replace("_", " ").replace("%and%", "||");
                     p = Bukkit.getPlayer(args[1]);
                     pitch = Float.parseFloat(args[5]);
+                    if (pitch < 0 || pitch > 10) {
+                        pitch = 1;
+                    }
                     volume = Float.parseFloat(args[4]);
+                    if (volume < 0 || volume > 10) {
+                        pitch = 1;
+                    }
                     sound = Sound.valueOf(args[3].toUpperCase());
 
                 } catch (Exception ignored) {

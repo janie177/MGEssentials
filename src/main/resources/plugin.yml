@@ -170,16 +170,29 @@ commands:
       default: false
       permission-message: You cannot use this. Go be a nazi somewhere else.
    joinsound:
-      description: Hail Plankton!
+      description: Change your joinsound.
       usage: /JS Set
       aliases: [js]
       default: false
       permission: minegusta.joinsound
       permission-message: You cannot use this. Go cri.
+   MassMute:
+      description: Mute the server except for the staff.
+      usage: /MassMute
+      aliases: [mm]
+      default: false
+      permission: minegusta.massmute
+      permission-message: You cannot use this. Go cri.
 
 permissions:
    minegusta.hug:
      description: hug people
+     default: op
+   minegusta.massmute.exempt:
+     description: Can still talk when server is muted
+     default: op
+   minegusta.massmute:
+     description: Turn on/off massmute
      default: op
    minegusta.mute:
      description: mute people

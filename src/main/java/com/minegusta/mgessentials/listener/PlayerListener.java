@@ -1,5 +1,6 @@
 package com.minegusta.mgessentials.listener;
 
+import com.minegusta.mgessentials.data.TempData;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -29,6 +30,7 @@ public class PlayerListener implements Listener {
             JoinSoundManager.playSound(uuid);
             e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', JoinSoundManager.getMessage(uuid)));
         }
+        if (TempData.massMute) e.setJoinMessage(" ");
 
     }
 
