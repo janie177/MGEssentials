@@ -176,14 +176,19 @@ commands:
       default: false
       permission: minegusta.joinsound
       permission-message: You cannot use this. Go cri.
-   MassMute:
+   massmute:
       description: Mute the server except for the staff.
       usage: /MassMute
       aliases: [mm]
       default: false
       permission: minegusta.massmute
       permission-message: You cannot use this. Go cri.
-
+   ghostify:
+      description: plz no mr skelentin spook
+      usage: /ghostify
+      default: false
+      permission: minegusta.ghostify
+      permission-message: You cannot use this. Go cri.
 permissions:
    minegusta.hug:
      description: hug people
@@ -238,4 +243,7 @@ permissions:
      default: op
    minegusta.joinsound:
      description: Can this player set joinsounds?
+     default: op
+   minegusta.ghostify:
+     description: pls no mr skelental?
      default: op

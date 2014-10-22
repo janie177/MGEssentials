@@ -1,6 +1,7 @@
 package com.minegusta.mgessentials.listener;
 
 import com.minegusta.mgessentials.data.TempData;
+import com.minegusta.mgessentials.ghost.GhostManager;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -32,6 +33,10 @@ public class PlayerListener implements Listener {
         }
         if (TempData.massMute) e.setJoinMessage(" ");
 
+        //Spook check (Warning, really spooky)
+        if (TempData.ghostMode) {
+            GhostManager.setSpook(e.getPlayer());
+        }
     }
 
 
