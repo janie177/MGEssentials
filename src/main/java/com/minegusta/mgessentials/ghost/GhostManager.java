@@ -24,7 +24,11 @@ public class GhostManager {
      */
     public static void setSpook(Player p) {
         p.setScoreboard(sb);
-        p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 20, 0, false));
+        for (PotionEffect ef : p.getActivePotionEffects()) {
+            if (ef.getType().equals(PotionEffectType.INVISIBILITY))
+                p.getPlayer().removePotionEffect(ef.getType());
+        }
+        p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 20, 0, false));
         team.addPlayer(Bukkit.getOfflinePlayer(p.getUniqueId()));
     }
 
@@ -54,6 +58,12 @@ public class GhostManager {
 
         for (OfflinePlayer p : team.getPlayers()) {
             team.removePlayer(p);
+            if (p.getPlayer().isOnline()) {
+                for (PotionEffect ef : p.getPlayer().getActivePotionEffects()) {
+                    if (ef.getType().equals(PotionEffectType.INVISIBILITY))
+                        p.getPlayer().removePotionEffect(ef.getType());
+                }
+            }
         }
     }
 
@@ -65,7 +75,8 @@ public class GhostManager {
         @Override
         public void run() {
             for (OfflinePlayer p : team.getPlayers()) {
-                if (!p.isOnline()) {
+                if (p.getPlayer() == null || !p.getPlayer().isOnline()) {
+                    Bukkit.broadcastMessage("Player offline. Removing from team!");
                     team.removePlayer(p);
                 } else {
                     for (PotionEffect ef : p.getPlayer().getActivePotionEffects()) {
@@ -76,5 +87,5 @@ public class GhostManager {
                 }
             }
         }
-    }, 15 * 20, 20 * 15);
+    }, 5 * 20, 20 * 15);
 }
