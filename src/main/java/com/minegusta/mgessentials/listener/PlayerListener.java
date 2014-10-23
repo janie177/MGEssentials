@@ -52,12 +52,12 @@ public class PlayerListener implements Listener {
     }
 
     //Open Mystery Box and Sign commands
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onMysteryBoxOpen(PlayerInteractEvent e) {
         Player player = e.getPlayer();
 
         //Spook
-        if (TempData.ghostMode && !e.hasBlock() && e.getAction().equals(Action.RIGHT_CLICK_AIR) && (e.getPlayer().getItemInHand() == null || e.getPlayer().getItemInHand().getType().equals(Material.AIR))) {
+        if (TempData.ghostMode && e.getAction() == Action.LEFT_CLICK_AIR) {
             e.getPlayer().performCommand("spook");
         }
 

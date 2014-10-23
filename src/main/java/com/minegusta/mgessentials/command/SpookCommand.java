@@ -31,6 +31,7 @@ public class SpookCommand implements CommandExecutor {
                 createSkeletal(p);
 
                 p.getWorld().spigot().playEffect(p.getLocation(), Effect.PORTAL, 0, 0, 1, 1, 1, 1, 25, 15);
+                p.getWorld().spigot().playEffect(p.getLocation(), Effect.MOBSPAWNER_FLAMES, 0, 0, 1, 1, 1, 1, 25, 15);
                 p.getWorld().playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
 
                 //Create a new cooldown.
@@ -50,17 +51,18 @@ public class SpookCommand implements CommandExecutor {
             public void run() {
                 for (LivingEntity bat : bats) {
                     if (bat != null && !bat.isDead()) {
-                        bat.getWorld().spigot().playEffect(bat.getLocation(), Effect.MOBSPAWNER_FLAMES, 0, 0, 1, 1, 1, 1, 6, 25);
+                        bat.getWorld().spigot().playEffect(bat.getLocation(), Effect.MOBSPAWNER_FLAMES, 0, 0, 1, 1, 1, 1, 12, 25);
                         bat.getWorld().playSound(bat.getLocation(), Sound.FIREWORK_BLAST, 1, 2);
+                        bat.remove();
                     }
                 }
             }
-        }, 20 * 5);
+        }, 20 * 4);
     }
 
     private void createSkeletal(Player p) {
         Skeleton skeleton = (Skeleton) p.getWorld().spawnEntity(p.getLocation(), EntityType.SKELETON);
-        skeleton.getEquipment().setHelmet(new ItemStack(Material.PUMPKIN, 1));
+        skeleton.getEquipment().setHelmet(new ItemStack(Material.JACK_O_LANTERN, 1));
         skeleton.setCustomNameVisible(true);
         skeleton.setCustomName(ChatColor.WHITE + "Mr Skeletal");
         skeleton.getEquipment().setItemInHand(new ItemStack(Material.WOOD_HOE, 1));
