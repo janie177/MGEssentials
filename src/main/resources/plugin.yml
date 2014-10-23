@@ -189,6 +189,9 @@ commands:
       default: false
       permission: minegusta.ghostify
       permission-message: You cannot use this. Go cri.
+   spook:
+      description: spooky scary skeletons send shivers down your spine
+      usage: /spook
 permissions:
    minegusta.hug:
      description: hug people

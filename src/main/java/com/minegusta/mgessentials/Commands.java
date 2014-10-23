@@ -36,6 +36,7 @@ public enum Commands {
     C54("joinsound", new JoinSoundCommand()),
     C55("massmute", new MassMuteCommand()),
     C35("ghostify", new GhostCommand()),
+    C36("spook", new SpookCommand()),
     C34("hail", new HailCommand());
 
 
