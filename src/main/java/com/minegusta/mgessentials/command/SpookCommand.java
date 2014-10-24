@@ -38,7 +38,7 @@ public class SpookCommand implements CommandExecutor {
                 CoolDown.newCooldown(p.getUniqueId(), TempData.spookMap);
                 createTask();
             } else {
-                p.sendMessage(ChatColor.RED + "You need to wait another " + CoolDown.getRemainingTime(p.getUniqueId(), TempData.spookMap, 60) + " seconds.");
+                p.sendMessage(ChatColor.RED + "You need to wait another " + CoolDown.getRemainingTime(p.getUniqueId(), TempData.spookMap, 60) + " seconds to spook.");
             }
         }
         return true;

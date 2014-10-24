@@ -76,7 +76,6 @@ public class GhostManager {
         public void run() {
             for (OfflinePlayer p : team.getPlayers()) {
                 if (p.getPlayer() == null || !p.getPlayer().isOnline()) {
-                    Bukkit.broadcastMessage("Player offline. Removing from team!");
                     team.removePlayer(p);
                 } else {
                     for (PotionEffect ef : p.getPlayer().getActivePotionEffects()) {
