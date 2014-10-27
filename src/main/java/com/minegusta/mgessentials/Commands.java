@@ -37,6 +37,7 @@ public enum Commands {
     C55("massmute", new MassMuteCommand()),
     C35("ghostify", new GhostCommand()),
     C36("spook", new SpookCommand()),
+    C38("giveall", new GiveAllCommand()),
     C34("hail", new HailCommand());
 
 

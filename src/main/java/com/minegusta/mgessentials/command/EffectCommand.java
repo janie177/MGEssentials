@@ -11,19 +11,17 @@ import org.bukkit.entity.Player;
 
 public class EffectCommand implements CommandExecutor {
 
-    
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
 
-        if (sender.hasPermission("minegusta.particles")) 
-        {
+        if (sender.hasPermission("minegusta.particles")) {
             if (sender instanceof ConsoleCommandSender) return false;
 
             String logo = ChatColor.DARK_RED + "[" + ChatColor.RED + "MineGusta Particles" + ChatColor.DARK_RED + "]";
             String header = ChatColor.AQUA + "=================================================";
-            String list = ChatColor.BLUE + "/Particle Flames/Smoke/Hearts/Ender/Rainbow/Snow";
+            String list = ChatColor.BLUE + "/Particle Flames/Smoke/Hearts/Ender/Rainbow/Snow/Bubble";
             String list2 = ChatColor.BLUE + "/Particle Magic/Green/Cloud/Note/Glyph/Portal/Off";
 
             if (args.length == 0) {
@@ -34,7 +32,7 @@ public class EffectCommand implements CommandExecutor {
                 return (true);
 
             } else {
-                
+
                 Player p = (Player) sender;
 
                 String whichEffect = args[0].toLowerCase();
@@ -59,13 +57,15 @@ public class EffectCommand implements CommandExecutor {
                     TempData.effectMap.put(p, Effect.NOTE);
                 } else if (whichEffect.equalsIgnoreCase("glyph")) {
                     TempData.effectMap.put(p, Effect.FLYING_GLYPH);
+                } else if (whichEffect.equalsIgnoreCase("bubble")) {
+                    TempData.effectMap.put(p, Effect.POTION_SWIRL_TRANSPARENT);
                 } else if (whichEffect.equalsIgnoreCase("portal")) {
                     TempData.effectMap.put(p, Effect.PORTAL);
                 } else if (whichEffect.equalsIgnoreCase("snow")) {
                     TempData.effectMap.put(p, Effect.SNOWBALL_BREAK);
 
                 } else if (whichEffect.equalsIgnoreCase("off")) {
-                    if(TempData.effectMap.containsKey(p))TempData.effectMap.remove(p);
+                    if (TempData.effectMap.containsKey(p)) TempData.effectMap.remove(p);
                     sender.sendMessage(logo);
                     sender.sendMessage(header);
                     sender.sendMessage(ChatColor.BLUE + "You now have " + ChatColor.RED + "no" + ChatColor.BLUE + " effect enabled.");

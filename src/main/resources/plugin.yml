@@ -192,9 +192,19 @@ commands:
    spook:
       description: spooky scary skeletons send shivers down your spine
       usage: /spook
+   giveall:
+      description: Give everyone the itemstack in your hand.
+      usage: /giveall
+      default: false
+      permission: minegusta.giveall
+      permission-message: Nope, no permissions for you, little one!
+
 permissions:
    minegusta.hug:
      description: hug people
+     default: op
+   minegusta.giveall:
+     description: Give everyone the itemstack in your hand.
      default: op
    minegusta.massmute.exempt:
      description: Can still talk when server is muted

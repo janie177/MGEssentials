@@ -58,7 +58,7 @@ public class GhostManager {
 
         for (OfflinePlayer p : team.getPlayers()) {
             team.removePlayer(p);
-            if (p.getPlayer().isOnline()) {
+            if (p.isOnline()) {
                 for (PotionEffect ef : p.getPlayer().getActivePotionEffects()) {
                     if (ef.getType().equals(PotionEffectType.INVISIBILITY))
                         p.getPlayer().removePotionEffect(ef.getType());
