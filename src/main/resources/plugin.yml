@@ -198,7 +198,11 @@ commands:
       default: false
       permission: minegusta.giveall
       permission-message: Nope, no permissions for you, little one!
-
+   staff:
+      description: See all staff in the server.
+      usage: /staff
+      default: true
+      permission-message: Nope, no permissions for you, little one!
 permissions:
    minegusta.hug:
      description: hug people
