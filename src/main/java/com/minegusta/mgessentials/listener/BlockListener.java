@@ -14,12 +14,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -154,6 +158,22 @@ public class BlockListener implements Listener {
                     placedSpawner.update();
                 }
             }
+        }
+    }
+
+    //Speed boost pads
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void pressurepadEvent(PlayerInteractEvent e) {
+        if (e.getAction() == Action.PHYSICAL && e.getClickedBlock().getType().equals(Material.STONE_PLATE) && e.getPlayer().hasPermission("minegusta.launch") && e.getClickedBlock().getRelative(BlockFace.DOWN).getType().equals(Material.LAPIS_BLOCK)) {
+            //It's a pressure plate and player has the perms
+            Player p = e.getPlayer();
+            for (PotionEffect ef : p.getActivePotionEffects()) {
+                if (ef.getType().equals(PotionEffectType.SPEED) || ef.getType().equals(PotionEffectType.JUMP)) {
+                    p.removePotionEffect(ef.getType());
+                }
+            }
+            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 15, 4, false));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20 * 15, 4, false));
         }
     }
 

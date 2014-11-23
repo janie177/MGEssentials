@@ -23,7 +23,7 @@ public class PlayerListener implements Listener {
 
 
     //JoinSounds
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onLogIn(PlayerJoinEvent e) {
         UUID uuid = e.getPlayer().getUniqueId();
 

@@ -24,7 +24,7 @@ public class VoteRedeemCommand implements CommandExecutor {
                 p.sendMessage(ChatColor.DARK_RED + "You cannot redeem mystery boxes in this world!");
                 return true;
             } else if (!(VotePointsDataManager.getPlayerVotes(p.getUniqueId()) > 0)) {
-                p.sendMessage(ChatColor.DARK_RED + "You did not vote!" + ChatColor.YELLOW + " http://www.minegusta.com/vote.html");
+                p.sendMessage(ChatColor.DARK_RED + "You did not vote!" + ChatColor.YELLOW + " http://www.minegusta.com/vote.php");
                 return true;
             } else {
                 VotePointsDataManager.removePoints(p.getUniqueId());

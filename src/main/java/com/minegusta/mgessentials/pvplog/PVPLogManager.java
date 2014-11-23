@@ -43,20 +43,10 @@ public class PVPLogManager {
      * @param p The player tagged.
      */
     public static void tag(Player p) {
-        final Player pl = p;
         if (!TempData.tagMap.containsKey(p.getName())) {
             TempData.tagMap.put(p.getName(), System.currentTimeMillis());
             sendMessage(p, ChatColor.DARK_RED + "You are now tagged as in PVP!");
-
-
-            //Removes the tag after x seconds.
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.PLUGIN, new Runnable() {
-                @Override
-                public void run() {
-                    if (TempData.tagMap.containsKey(pl.getName())) TempData.tagMap.remove(pl.getName());
-                    sendMessage(pl, ChatColor.GREEN + "You are no longer in pvp and can safely log out!");
-                }
-            }, 20 * coolDownTime);
+            unTag(p);
         }
     }
 
@@ -69,5 +59,18 @@ public class PVPLogManager {
      */
     private static void sendMessage(Player p, String s) {
         p.sendMessage(ChatColor.RED + "[" + ChatColor.DARK_RED + "TAG" + ChatColor.RED + "] " + s);
+    }
+
+    private static void unTag(final Player pl) {
+        //Removes the tag after x seconds.
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.PLUGIN, new Runnable() {
+            @Override
+            public void run() {
+                if (TempData.tagMap.containsKey(pl.getName())) {
+                    TempData.tagMap.remove(pl.getName());
+                    sendMessage(pl, ChatColor.GREEN + "You are no longer in pvp and can safely log out!");
+                }
+            }
+        }, 20 * coolDownTime);
     }
 }
