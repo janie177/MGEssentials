@@ -264,3 +264,6 @@ permissions:
    minegusta.ghostify:
      description: pls no mr skelental?
      default: op
+   minegusta.staff:
+     description: Is this player staff?
+     default: op
