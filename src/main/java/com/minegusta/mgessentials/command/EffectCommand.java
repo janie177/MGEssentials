@@ -38,34 +38,35 @@ public class EffectCommand implements CommandExecutor {
                 String whichEffect = args[0].toLowerCase();
 
                 if (whichEffect.equalsIgnoreCase("magic")) {
-                    TempData.effectMap.put(p, Effect.WITCH_MAGIC);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.WITCH_MAGIC);
                 } else if (whichEffect.equalsIgnoreCase("smoke")) {
-                    TempData.effectMap.put(p, Effect.SMOKE);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.SMOKE);
                 } else if (whichEffect.equalsIgnoreCase("ender")) {
-                    TempData.effectMap.put(p, Effect.ENDER_SIGNAL);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.ENDER_SIGNAL);
                 } else if (whichEffect.equalsIgnoreCase("hearts")) {
-                    TempData.effectMap.put(p, Effect.HEART);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.HEART);
                 } else if (whichEffect.equalsIgnoreCase("rainbow")) {
-                    TempData.effectMap.put(p, Effect.COLOURED_DUST);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.COLOURED_DUST);
                 } else if (whichEffect.equalsIgnoreCase("flames")) {
-                    TempData.effectMap.put(p, Effect.MOBSPAWNER_FLAMES);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.MOBSPAWNER_FLAMES);
                 } else if (whichEffect.equalsIgnoreCase("green")) {
-                    TempData.effectMap.put(p, Effect.HAPPY_VILLAGER);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.HAPPY_VILLAGER);
                 } else if (whichEffect.equalsIgnoreCase("cloud")) {
-                    TempData.effectMap.put(p, Effect.VILLAGER_THUNDERCLOUD);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.VILLAGER_THUNDERCLOUD);
                 } else if (whichEffect.equalsIgnoreCase("note")) {
-                    TempData.effectMap.put(p, Effect.NOTE);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.NOTE);
                 } else if (whichEffect.equalsIgnoreCase("glyph")) {
-                    TempData.effectMap.put(p, Effect.FLYING_GLYPH);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.FLYING_GLYPH);
                 } else if (whichEffect.equalsIgnoreCase("bubble")) {
-                    TempData.effectMap.put(p, Effect.POTION_SWIRL_TRANSPARENT);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.POTION_SWIRL_TRANSPARENT);
                 } else if (whichEffect.equalsIgnoreCase("portal")) {
-                    TempData.effectMap.put(p, Effect.PORTAL);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.PORTAL);
                 } else if (whichEffect.equalsIgnoreCase("snow")) {
-                    TempData.effectMap.put(p, Effect.SNOWBALL_BREAK);
+                    TempData.effectMap.put(p.getUniqueId().toString(), Effect.SNOWBALL_BREAK);
 
                 } else if (whichEffect.equalsIgnoreCase("off")) {
-                    if (TempData.effectMap.containsKey(p)) TempData.effectMap.remove(p);
+                    if (TempData.effectMap.containsKey(p.getUniqueId().toString()))
+                        TempData.effectMap.remove(p.getUniqueId().toString());
                     sender.sendMessage(logo);
                     sender.sendMessage(header);
                     sender.sendMessage(ChatColor.BLUE + "You now have " + ChatColor.RED + "no" + ChatColor.BLUE + " effect enabled.");
