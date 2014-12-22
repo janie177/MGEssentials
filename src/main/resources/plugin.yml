@@ -267,3 +267,8 @@ permissions:
    minegusta.staff:
      description: Is this player staff?
      default: op
+   minegusta.rek:
+     description: Rek people!?
+     default: op
+     permission: minegusta.rek
+     permission-message: You cannot use this. Go cri.

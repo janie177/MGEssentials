@@ -39,6 +39,7 @@ public enum Commands {
     C36("spook", new SpookCommand()),
     C38("giveall", new GiveAllCommand()),
     STAFF("staff", new StaffCommand()),
+    REK("rek", new RekCommand()),
     C34("hail", new HailCommand());
 
 
