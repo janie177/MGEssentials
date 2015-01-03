@@ -86,39 +86,12 @@ public class BlockListener implements Listener {
 
 
                     CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
-                    String mobType = "Pig";
                     EntityType entity = spawner.getSpawnedType();
-                    switch (entity) {
-                        case PIG:
-                            mobType = ChatColor.LIGHT_PURPLE + "Pig";
-                            break;
-                        case SKELETON:
-                            mobType = ChatColor.WHITE + "Skeleton";
-                            break;
-                        case SPIDER:
-                            mobType = ChatColor.BLACK + "Spider";
-                            break;
-                        case ZOMBIE:
-                            mobType = ChatColor.DARK_GREEN + "Zombie";
-                            break;
-                        case CAVE_SPIDER:
-                            mobType = ChatColor.DARK_PURPLE + "Cave Spider";
-                            break;
-                        case BLAZE:
-                            mobType = ChatColor.GOLD + "Blaze";
-                            break;
-                        case SILVERFISH:
-                            mobType = ChatColor.GRAY + "SilverFish";
-                            break;
-                        default:
-                            mobType = ChatColor.LIGHT_PURPLE + "Pig";
-                            break;
-                    }
 
 
                     ItemStack mobSpawner = new ItemStack(Material.MOB_SPAWNER, 1);
                     ArrayList<String> spawnerType = Lists.newArrayList();
-                    spawnerType.add(mobType + " Spawner");
+                    spawnerType.add(ChatColor.YELLOW + entity.name() + " Spawner");
                     ItemMeta meta = mobSpawner.getItemMeta();
                     meta.setLore(spawnerType);
                     mobSpawner.setItemMeta(meta);
@@ -138,23 +111,21 @@ public class BlockListener implements Listener {
         ItemStack spawner = e.getItemInHand();
         if (spawner.getType().equals(Material.MOB_SPAWNER) && !e.isCancelled()) {
             if (spawner.getItemMeta().hasLore()) {
-                if (spawner.getItemMeta().getLore().toString().contains("Spawner")) {
-                    CreatureSpawner placedSpawner = (CreatureSpawner) block.getState();
-                    if (spawner.getItemMeta().getLore().toString().contains("Pig")) {
-                        placedSpawner.setSpawnedType(EntityType.PIG);
-                    } else if (spawner.getItemMeta().getLore().toString().contains("Skeleton")) {
-                        placedSpawner.setSpawnedType(EntityType.SKELETON);
-                    } else if (spawner.getItemMeta().getLore().toString().contains("Spider")) {
-                        placedSpawner.setSpawnedType(EntityType.SPIDER);
-                    } else if (spawner.getItemMeta().getLore().toString().contains("Zombie")) {
-                        placedSpawner.setSpawnedType(EntityType.ZOMBIE);
-                    } else if (spawner.getItemMeta().getLore().toString().contains("Cave Spider")) {
-                        placedSpawner.setSpawnedType(EntityType.CAVE_SPIDER);
-                    } else if (spawner.getItemMeta().getLore().toString().contains("Blaze")) {
-                        placedSpawner.setSpawnedType(EntityType.BLAZE);
-                    } else if (spawner.getItemMeta().getLore().toString().contains("SilverFish")) {
-                        placedSpawner.setSpawnedType(EntityType.SILVERFISH);
+                if (!spawner.getItemMeta().hasLore()) return;
+                String lore = spawner.getItemMeta().getLore().get(0);
+                if (lore.contains(" Spawner")) {
+                    EntityType type;
+                    String typeName = ChatColor.stripColor(lore).replace(" Spawner", "").toUpperCase();
+                    try {
+                        type = EntityType.valueOf(typeName);
+                    } catch (Exception ignored) {
+                        type = EntityType.PIG;
                     }
+
+                    CreatureSpawner placedSpawner = (CreatureSpawner) block.getState();
+
+                    placedSpawner.setSpawnedType(type);
+
                     placedSpawner.update();
                 }
             }
