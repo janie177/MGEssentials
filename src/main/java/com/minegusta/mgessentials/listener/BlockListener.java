@@ -114,7 +114,7 @@ public class BlockListener implements Listener {
                 String lore = ChatColor.stripColor(spawner.getItemMeta().getLore().get(0));
                 if (lore.toLowerCase().contains(" spawner")) {
                     EntityType type;
-                    String typeName = lore.toLowerCase().replace(" spawner", "").toUpperCase();
+                    String typeName = lore.toLowerCase().replace(" spawner", "").replace(".", "").toUpperCase();
                     try {
                         type = EntityType.valueOf(typeName);
                     } catch (Exception ignored) {
