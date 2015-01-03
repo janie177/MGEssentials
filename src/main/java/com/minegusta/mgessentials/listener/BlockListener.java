@@ -111,10 +111,10 @@ public class BlockListener implements Listener {
         ItemStack spawner = e.getItemInHand();
         if (spawner.getType().equals(Material.MOB_SPAWNER) && !e.isCancelled()) {
             if (spawner.getItemMeta().hasLore()) {
-                String lore = spawner.getItemMeta().getLore().get(0);
+                String lore = ChatColor.stripColor(spawner.getItemMeta().getLore().get(0));
                 if (lore.toLowerCase().contains(" spawner")) {
                     EntityType type;
-                    String typeName = ChatColor.stripColor(lore.toLowerCase()).replace(" spawner", "").toUpperCase();
+                    String typeName = lore.toLowerCase().replace(" spawner", "").toUpperCase();
                     try {
                         type = EntityType.valueOf(typeName);
                     } catch (Exception ignored) {
