@@ -2,6 +2,7 @@ package com.minegusta.mgessentials.listener;
 
 import com.google.common.collect.Lists;
 import com.minegusta.mgessentials.util.RainBowStringMaker;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -111,11 +112,11 @@ public class BlockListener implements Listener {
         ItemStack spawner = e.getItemInHand();
         if (spawner.getType().equals(Material.MOB_SPAWNER) && !e.isCancelled()) {
             if (spawner.getItemMeta().hasLore()) {
-                if (!spawner.getItemMeta().hasLore()) return;
                 String lore = spawner.getItemMeta().getLore().get(0);
-                if (lore.contains(" Spawner")) {
+                if (lore.toLowerCase().contains(" spawner")) {
                     EntityType type;
-                    String typeName = ChatColor.stripColor(lore).replace(" Spawner", "").toUpperCase();
+                    String typeName = ChatColor.stripColor(lore.toLowerCase()).replace(" spawner", "").toUpperCase();
+                    Bukkit.broadcastMessage(typeName);
                     try {
                         type = EntityType.valueOf(typeName);
                     } catch (Exception ignored) {
