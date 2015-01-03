@@ -74,7 +74,7 @@ public class BlockListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onMineStuff(BlockBreakEvent e) {
         if (!(e.isCancelled()) && e.getPlayer().hasPermission("minegusta.donator")) {
             Material block = e.getBlock().getType();
@@ -105,7 +105,7 @@ public class BlockListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockPlace(BlockPlaceEvent e) {
         Block block = e.getBlockPlaced();
         ItemStack spawner = e.getItemInHand();
