@@ -11,7 +11,7 @@ public class RekCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
-        if (args.length < 1) {
+        if (!s.isOp() || !s.hasPermission("minegusta.rek") || args.length < 1) {
             s.sendMessage(ChatColor.RED + "Usage: " + ChatColor.DARK_RED + "/Rek <Name>");
         } else {
             if (args[0].equals("*")) {
@@ -35,6 +35,7 @@ public class RekCommand implements CommandExecutor {
     }
 
     private void rekPlayer(Player p, String sender) {
-        //Wait for 1.8 title support. I don't wanna add a lib.
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "title " + p.getName() + " title " + "{text:\"You got rekt\",color:red,bold:true}");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "title " + p.getName() + " subtitle " + "{text:\"by " + sender + "\",color:gray,italic:true}");
     }
 }

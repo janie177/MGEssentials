@@ -169,6 +169,18 @@ commands:
       aliases: [heil, obey]
       default: false
       permission-message: You cannot use this. Go be a nazi somewhere else.
+   warn:
+      description: Warn someone!
+      usage: /Warn <name> [reason]
+      default: false
+      permission: minegusta.warn
+      permission-message: You cannot use this. Go be a noob somewhere else.
+   rek:
+      description: Get rekt.
+      usage: /Rek <name>
+      default: false
+      permission: minegusta.rek
+      permission-message: You cannot use this. Go be a noob somewhere else.
    joinsound:
       description: Change your joinsound.
       usage: /JS Set
