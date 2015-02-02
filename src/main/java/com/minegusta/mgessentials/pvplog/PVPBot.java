@@ -20,6 +20,7 @@ public class PvpBot {
     private String name;
     private int TASK = -1;
     private Zombie v;
+    private double health;
     private Inventory inv;
     private int seconds = 0;
     private ItemStack[] armour;
@@ -29,6 +30,7 @@ public class PvpBot {
         this.uuid = p.getUniqueId();
         this.loc = p.getLocation();
         this.name = p.getName();
+        this.health = p.getHealth();
         this.inv = p.getInventory();
         this.armour = p.getInventory().getArmorContents();
         //Getting 9 chunks around the location.
@@ -102,6 +104,7 @@ public class PvpBot {
         v.setCustomName(name);
         v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 100, 10));
         v.setVillager(false);
+        v.setHealth(health / 2 + 1);
         v.getEquipment().setArmorContents(armour);
 
         return v;

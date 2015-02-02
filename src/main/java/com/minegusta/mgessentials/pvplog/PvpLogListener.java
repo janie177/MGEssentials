@@ -43,6 +43,7 @@ public class PvpLogListener implements Listener {
         if (e.getEntity() instanceof Zombie && LogData.bots.containsKey(e.getEntity().getUniqueId().toString())) {
             Zombie z = (Zombie) e.getEntity();
             z.getEquipment().setArmorContents(new ItemStack[]{null, null, null, null});
+            e.getDrops().clear();
         }
     }
 
