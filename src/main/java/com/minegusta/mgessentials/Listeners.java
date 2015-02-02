@@ -1,6 +1,7 @@
 package com.minegusta.mgessentials;
 
 import com.minegusta.mgessentials.listener.*;
+import com.minegusta.mgessentials.pvplog.PvpLogListener;
 import org.bukkit.event.Listener;
 
 public enum Listeners {
@@ -8,6 +9,7 @@ public enum Listeners {
     L2(new ChatListener()),
     L3(new EntityListener()),
     L4(new PlayerListener()),
+    PVPLOGLISTENER(new PvpLogListener()),
     L5(new ProjectileListener());
 
     private Listener listener;
