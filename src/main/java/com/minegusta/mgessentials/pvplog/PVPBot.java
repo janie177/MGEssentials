@@ -106,7 +106,7 @@ public class PvpBot {
         v.setBaby(false);
         v.setCustomNameVisible(true);
         v.setCustomName(name);
-        v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 100, 10));
+        v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 120, 10));
         v.setVillager(false);
         v.setHealth(health / 2 + 1);
         v.getEquipment().setArmorContents(armour);
@@ -114,6 +114,7 @@ public class PvpBot {
         return v;
     }
 
+    //10 seconds but this can be changed in the listener class. Has to be updated by hand.
     public int getRemainingTime() {
         return 10 - seconds;
     }
