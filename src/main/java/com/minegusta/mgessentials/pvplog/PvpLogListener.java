@@ -5,10 +5,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -33,6 +35,14 @@ public class PvpLogListener implements Listener {
             }
             inCombat.put(e.getEntity().getUniqueId().toString(), coolDownSeconds);
             inCombat.put(e.getDamager().getUniqueId().toString(), coolDownSeconds);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onEntityDeath(EntityDeathEvent e) {
+        if (e.getEntity() instanceof Zombie && LogData.bots.containsKey(e.getEntity().getUniqueId().toString())) {
+            Zombie z = (Zombie) e.getEntity();
+            z.getEquipment().setArmorContents(new ItemStack[]{null, null, null, null});
         }
     }
 

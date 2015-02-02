@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentMap;
 
 public class LogData {
     public static ConcurrentMap<String, PvpBot> logMap = Maps.newConcurrentMap();
+    public static ConcurrentMap<String, Boolean> bots = Maps.newConcurrentMap();
     public static ConcurrentMap<String, List<Chunk>> chunkMap = Maps.newConcurrentMap();
 
 

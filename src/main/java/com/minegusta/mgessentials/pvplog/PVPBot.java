@@ -42,6 +42,7 @@ public class PvpBot {
 
         this.v = spawnBot();
         TASK = start();
+        LogData.bots.put(v.getUniqueId().toString(), true);
     }
 
 
@@ -64,7 +65,9 @@ public class PvpBot {
 
     private void loopTask() {
         if (v.isDead()) {
-            v.getEquipment().setArmorContents(new ItemStack[]{null, null, null, null});
+
+            LogData.bots.remove(v.getUniqueId().toString());
+
             for (ItemStack i : inv) {
                 if (i != null && i.getType() != Material.AIR) loc.getWorld().dropItemNaturally(loc, i);
             }
@@ -82,8 +85,9 @@ public class PvpBot {
     }
 
     private void removeBot() {
-        v.setHealth(0);
+        LogData.bots.remove(v.getUniqueId().toString());
         v.getEquipment().setArmorContents(new ItemStack[]{null, null, null, null});
+        v.setHealth(0);
         v.damage(100);
         v.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 20, 20));
         v.remove();
