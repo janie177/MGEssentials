@@ -73,6 +73,10 @@ public class PvpBot {
             for (ItemStack i : inv) {
                 if (i != null && i.getType() != Material.AIR) loc.getWorld().dropItemNaturally(loc, i);
             }
+
+            for (ItemStack i : armour) {
+                if (i != null && i.getType() != Material.AIR) loc.getWorld().dropItemNaturally(loc, i);
+            }
             LogoutManager.set(uuid, true);
             stop();
             return;

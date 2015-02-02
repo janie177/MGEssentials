@@ -3,7 +3,6 @@ package com.minegusta.mgessentials.pvplog;
 import com.google.common.collect.Maps;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
@@ -68,11 +67,7 @@ public class PvpLogListener implements Listener {
         if (!LogData.contains(e.getPlayer()) && LogoutManager.getIfDead(e.getPlayer().getUniqueId())) {
             e.getPlayer().sendMessage(ChatColor.RED + "You died after you PVP logged.");
 
-            int slot = 0;
-            for (ItemStack i : e.getPlayer().getInventory()) {
-                e.getPlayer().getInventory().setItem(slot, new ItemStack(Material.AIR));
-                slot++;
-            }
+            e.getPlayer().getInventory().clear();
             e.getPlayer().setHealth(0);
             LogoutManager.reset(e.getPlayer().getUniqueId());
         }
