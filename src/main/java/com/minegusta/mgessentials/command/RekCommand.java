@@ -11,7 +11,7 @@ public class RekCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
-        if (!s.isOp() || !s.hasPermission("minegusta.rek") || args.length < 1) {
+        if ((!s.isOp() && !s.hasPermission("minegusta.rek")) || args.length < 1) {
             s.sendMessage(ChatColor.RED + "Usage: " + ChatColor.DARK_RED + "/Rek <Name>");
         } else {
             if (args[0].equals("*")) {
