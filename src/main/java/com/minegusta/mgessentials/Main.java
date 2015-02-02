@@ -1,7 +1,9 @@
 package com.minegusta.mgessentials;
 
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
+import com.minegusta.mgessentials.pvplog.LogData;
 import com.minegusta.mgessentials.pvplog.LogoutManager;
+import com.minegusta.mgessentials.pvplog.PvpBot;
 import com.minegusta.mgessentials.tasks.CombatTask;
 import com.minegusta.mgessentials.tasks.ParticleTask;
 import com.minegusta.mgessentials.tasks.SaveTask;
@@ -49,6 +51,13 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
+
+        //Remove all bots just in case
+        for (PvpBot bot : LogData.logMap.values()) {
+            bot.removeBot();
+            bot.stop();
+        }
+
         //Save the votepoints file
         VotePointsDataManager.save();
 

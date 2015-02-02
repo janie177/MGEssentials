@@ -90,7 +90,7 @@ public class PvpBot {
         }
     }
 
-    private void removeBot() {
+    public void removeBot() {
         LogData.bots.remove(v.getUniqueId().toString());
         v.getEquipment().setArmorContents(new ItemStack[]{null, null, null, null});
         v.setHealth(0);
