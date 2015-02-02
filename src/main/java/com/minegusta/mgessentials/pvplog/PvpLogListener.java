@@ -68,6 +68,7 @@ public class PvpLogListener implements Listener {
             e.getPlayer().sendMessage(ChatColor.RED + "You died after you PVP logged.");
 
             e.getPlayer().getInventory().clear();
+            e.getPlayer().getEquipment().clear();
             e.getPlayer().setHealth(0);
             LogoutManager.reset(e.getPlayer().getUniqueId());
         }
