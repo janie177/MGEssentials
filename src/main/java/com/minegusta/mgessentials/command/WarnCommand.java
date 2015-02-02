@@ -33,7 +33,7 @@ public class WarnCommand implements CommandExecutor {
             try {
                 Player victim = Bukkit.getPlayer(args[0]);
 
-                warnPlayer(victim, s.getName());
+                warnPlayer(victim, warning);
 
                 s.sendMessage(ChatColor.YELLOW + "You warned " + victim.getName() + ".");
             } catch (Exception ignored) {
