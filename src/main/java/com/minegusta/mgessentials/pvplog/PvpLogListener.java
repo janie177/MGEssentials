@@ -69,6 +69,7 @@ public class PvpLogListener implements Listener {
 
             e.getPlayer().getInventory().clear();
             e.getPlayer().getEquipment().clear();
+            e.getPlayer().getInventory().setArmorContents(new ItemStack[]{null, null, null, null});
             e.getPlayer().setHealth(0);
             LogoutManager.reset(e.getPlayer().getUniqueId());
         }
