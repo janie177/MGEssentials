@@ -48,6 +48,8 @@ public class Main extends JavaPlugin {
 
         //Start the particle task
         PARTICLETASK = ParticleTask.start();
+
+
     }
 
     public void onDisable() {

@@ -47,7 +47,7 @@ public class GhostManager {
             setSpook(p);
         }
 
-        SPOOKTASK = spookTask;
+        SPOOKTASK = startSpookTask();
     }
 
     /**
@@ -71,20 +71,22 @@ public class GhostManager {
     /**
      * This is the task for the spooking effect. Wooosh!
      */
-    private static int spookTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.PLUGIN, new Runnable() {
-        @Override
-        public void run() {
-            for (OfflinePlayer p : team.getPlayers()) {
-                if (p.getPlayer() == null || !p.getPlayer().isOnline()) {
-                    team.removePlayer(p);
-                } else {
-                    for (PotionEffect ef : p.getPlayer().getActivePotionEffects()) {
-                        if (ef.getType().equals(PotionEffectType.INVISIBILITY))
-                            p.getPlayer().removePotionEffect(ef.getType());
+    private static int startSpookTask() {
+        return Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.PLUGIN, new Runnable() {
+            @Override
+            public void run() {
+                for (OfflinePlayer p : team.getPlayers()) {
+                    if (p.getPlayer() == null || !p.getPlayer().isOnline()) {
+                        team.removePlayer(p);
+                    } else {
+                        for (PotionEffect ef : p.getPlayer().getActivePotionEffects()) {
+                            if (ef.getType().equals(PotionEffectType.INVISIBILITY))
+                                p.getPlayer().removePotionEffect(ef.getType());
+                        }
+                        p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 20, 0, false));
                     }
-                    p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 20, 0, false));
                 }
             }
-        }
-    }, 5 * 20, 20 * 15);
+        }, 5 * 20, 20 * 15);
+    }
 }
