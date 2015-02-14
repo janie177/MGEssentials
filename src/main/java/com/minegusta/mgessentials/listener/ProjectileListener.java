@@ -1,11 +1,11 @@
 package com.minegusta.mgessentials.listener;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.minegusta.mgessentials.Main;
 import com.minegusta.mgessentials.data.TempData;
 import org.bukkit.*;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -40,18 +41,24 @@ public class ProjectileListener implements Listener {
 
     private static final List<Material> blackBlockList = Lists.newArrayList(Material.IRON_DOOR, Material.ACACIA_DOOR, Material.BIRCH_DOOR, Material.DARK_OAK_DOOR, Material.JUNGLE_DOOR, Material.SPRUCE_DOOR, Material.WOODEN_DOOR, Material.WOOD_DOOR, Material.TRAP_DOOR, Material.IRON_FENCE, Material.FENCE, Material.STAINED_GLASS_PANE, Material.THIN_GLASS);
 
+    private static ConcurrentMap<String, Boolean> blockedTeleports = Maps.newConcurrentMap();
+
     @EventHandler
     public void onArrowImpactEvent(ProjectileHitEvent event) {
         if (!(event.getEntity().getShooter() instanceof Player)) return;
         Player player = (Player) event.getEntity().getShooter();
 
         if (event.getEntity() instanceof EnderPearl) {
-            Material b1 = event.getEntity().getLocation().getBlock().getType();
-            Material b2 = event.getEntity().getLocation().getBlock().getRelative(BlockFace.UP).getType();
+            Location l = event.getEntity().getLocation();
 
-            if (blackBlockList.contains(b1) || blackBlockList.contains(b2)) {
-                player.sendMessage(ChatColor.RED + "You cannot throw a pearl there because of glitching.");
-                player.teleport(player.getLocation());
+            for (int x = -1; x < 2; x++) {
+                for (int y = -1; y < 2; y++) {
+                    for (int z = -1; z < 2; z++) {
+                        if (blackBlockList.contains(l.add(x, y, z).getBlock().getType())) {
+                            blockedTeleports.put(player.getUniqueId().toString(), true);
+                        }
+                    }
+                }
             }
         }
 
@@ -68,6 +75,15 @@ public class ProjectileListener implements Listener {
                     }
                 }, i);
             }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerTelerpot(PlayerTeleportEvent e) {
+        if (e.getCause() == PlayerTeleportEvent.TeleportCause.ENDER_PEARL && blockedTeleports.containsKey(e.getPlayer().getUniqueId().toString())) {
+            blockedTeleports.remove(e.getPlayer().getUniqueId().toString());
+            e.getPlayer().sendMessage(ChatColor.RED + "You cannot throw a pearl there because of glitching.");
+            e.setCancelled(true);
         }
     }
 
