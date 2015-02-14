@@ -1,9 +1,11 @@
 package com.minegusta.mgessentials;
 
+import com.minegusta.mgessentials.data.MainConfig;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
 import com.minegusta.mgessentials.pvplog.LogData;
 import com.minegusta.mgessentials.pvplog.LogoutManager;
 import com.minegusta.mgessentials.pvplog.PvpBot;
+import com.minegusta.mgessentials.pvplog.PvpLogListener;
 import com.minegusta.mgessentials.tasks.CombatTask;
 import com.minegusta.mgessentials.tasks.ParticleTask;
 import com.minegusta.mgessentials.tasks.SaveTask;
@@ -21,18 +23,11 @@ public class Main extends JavaPlugin {
         //Setting the Plugin
         PLUGIN = this;
 
-        //Register all the commands.
-        for (Commands command : Commands.values()) {
-            getCommand(command.getCommandName().toLowerCase()).setExecutor(command.getExecutor());
-        }
-
-        //Register all the listeners
-        for (Listeners listener : Listeners.values()) {
-            Bukkit.getPluginManager().registerEvents(listener.getListener(), this);
-        }
-
         //Load the vote points file.
         VotePointsDataManager.createOrLoadPointsFile(PLUGIN);
+
+        //Load the config file.
+        MainConfig.loadConfig();
 
         //Load the pvp log file
         LogoutManager.createFile(PLUGIN);
@@ -48,6 +43,19 @@ public class Main extends JavaPlugin {
 
         //Start the particle task
         PARTICLETASK = ParticleTask.start();
+
+        //Register all the commands.
+        for (Commands command : Commands.values()) {
+            getCommand(command.getCommandName().toLowerCase()).setExecutor(command.getExecutor());
+        }
+
+        //Register all the listeners
+        for (Listeners listener : Listeners.values()) {
+            Bukkit.getPluginManager().registerEvents(listener.getListener(), this);
+        }
+
+        //Register the PVPlog listener by hand IF enabled.
+        if (MainConfig.getPvpBotEnabled()) Bukkit.getPluginManager().registerEvents(new PvpLogListener(), this);
 
 
     }
