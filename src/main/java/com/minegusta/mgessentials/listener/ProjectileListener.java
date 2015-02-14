@@ -51,10 +51,12 @@ public class ProjectileListener implements Listener {
         if (event.getEntity() instanceof EnderPearl) {
             Location l = event.getEntity().getLocation();
 
-            for (int x = -2; x < 3; x++) {
-                for (int y = -2; y < 3; y++) {
-                    for (int z = -2; z < 3; z++) {
-                        if (blackBlockList.contains(l.add(x, y, z).getBlock().getType())) {
+            for (int x = -1; x < 2; x++) {
+                for (int y = -1; y < 2; y++) {
+                    for (int z = -1; z < 2; z++) {
+
+                        Material mat = l.getWorld().getBlockAt((int) l.getX() + x, (int) l.getY() + y, (int) l.getZ() + z).getType();
+                        if (blackBlockList.contains(mat)) {
                             blockedTeleports.put(player.getUniqueId().toString(), true);
                             break;
                         }
