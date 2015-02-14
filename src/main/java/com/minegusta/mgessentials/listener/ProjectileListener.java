@@ -39,7 +39,7 @@ public class ProjectileListener implements Listener {
             }
     }
 
-    private static final List<Material> blackBlockList = Lists.newArrayList(Material.IRON_DOOR, Material.ACACIA_DOOR, Material.BIRCH_DOOR, Material.DARK_OAK_DOOR, Material.JUNGLE_DOOR, Material.SPRUCE_DOOR, Material.WOODEN_DOOR, Material.WOOD_DOOR, Material.TRAP_DOOR, Material.IRON_FENCE, Material.FENCE, Material.STAINED_GLASS_PANE, Material.THIN_GLASS);
+    private static final List<Material> blackBlockList = Lists.newArrayList(Material.IRON_DOOR, Material.IRON_DOOR_BLOCK, Material.IRON_TRAPDOOR, Material.ACACIA_DOOR, Material.BIRCH_DOOR, Material.DARK_OAK_DOOR, Material.JUNGLE_DOOR, Material.SPRUCE_DOOR, Material.WOODEN_DOOR, Material.WOOD_DOOR, Material.TRAP_DOOR, Material.IRON_FENCE, Material.FENCE, Material.STAINED_GLASS_PANE, Material.THIN_GLASS);
 
     private static ConcurrentMap<String, Boolean> blockedTeleports = Maps.newConcurrentMap();
 
@@ -51,11 +51,12 @@ public class ProjectileListener implements Listener {
         if (event.getEntity() instanceof EnderPearl) {
             Location l = event.getEntity().getLocation();
 
-            for (int x = -1; x < 2; x++) {
-                for (int y = -1; y < 2; y++) {
-                    for (int z = -1; z < 2; z++) {
+            for (int x = -2; x < 3; x++) {
+                for (int y = -2; y < 3; y++) {
+                    for (int z = -2; z < 3; z++) {
                         if (blackBlockList.contains(l.add(x, y, z).getBlock().getType())) {
                             blockedTeleports.put(player.getUniqueId().toString(), true);
+                            break;
                         }
                     }
                 }
