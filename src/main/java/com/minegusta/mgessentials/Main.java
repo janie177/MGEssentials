@@ -63,9 +63,11 @@ public class Main extends JavaPlugin {
     public void onDisable() {
 
         //Remove all bots just in case
-        for (PvpBot bot : LogData.logMap.values()) {
-            bot.removeBot();
-            bot.stop();
+        if (MainConfig.getPvpBotEnabled()) {
+            for (PvpBot bot : LogData.logMap.values()) {
+                bot.removeBot();
+                bot.stop();
+            }
         }
 
         //Save the votepoints file

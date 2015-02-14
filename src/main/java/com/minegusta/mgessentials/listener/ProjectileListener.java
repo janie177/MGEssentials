@@ -1,10 +1,13 @@
 package com.minegusta.mgessentials.listener;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.minegusta.mgessentials.Main;
 import com.minegusta.mgessentials.data.TempData;
 import org.bukkit.*;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +17,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
@@ -34,10 +38,23 @@ public class ProjectileListener implements Listener {
             }
     }
 
+    private static final List<Material> blackBlockList = Lists.newArrayList(Material.IRON_DOOR, Material.ACACIA_DOOR, Material.BIRCH_DOOR, Material.DARK_OAK_DOOR, Material.JUNGLE_DOOR, Material.SPRUCE_DOOR, Material.WOODEN_DOOR, Material.WOOD_DOOR, Material.TRAP_DOOR, Material.IRON_FENCE, Material.FENCE, Material.STAINED_GLASS_PANE, Material.THIN_GLASS);
+
     @EventHandler
     public void onArrowImpactEvent(ProjectileHitEvent event) {
         if (!(event.getEntity().getShooter() instanceof Player)) return;
         Player player = (Player) event.getEntity().getShooter();
+
+        if (event.getEntity() instanceof EnderPearl) {
+            Material b1 = event.getEntity().getLocation().getBlock().getType();
+            Material b2 = event.getEntity().getLocation().getBlock().getRelative(BlockFace.UP).getType();
+
+            if (blackBlockList.contains(b1) || blackBlockList.contains(b2)) {
+                player.sendMessage(ChatColor.RED + "You cannot throw a pearl there because of glitching.");
+                player.teleport(player.getLocation());
+            }
+        }
+
         if (event.getEntity() instanceof Arrow && arrows.contains(event.getEntity())) {
             arrows.remove(event.getEntity());
             player.sendMessage(ChatColor.YELLOW + "Boom!");
