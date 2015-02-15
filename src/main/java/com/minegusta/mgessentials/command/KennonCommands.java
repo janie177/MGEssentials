@@ -22,6 +22,12 @@ public class KennonCommands implements CommandExecutor {
             kennon.sendMessage(ChatColor.LIGHT_PURPLE + "/Pet <Maus>)");
         }
         if (cmd.getName().equalsIgnoreCase("lick")) {
+            if (args[0].equalsIgnoreCase("*")) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    lickPlayer(p, kennon);
+                }
+                return true;
+            }
             try {
                 Player licked = Bukkit.getPlayer(args[0]);
 
@@ -36,9 +42,7 @@ public class KennonCommands implements CommandExecutor {
                     return true;
                 }
 
-                kennon.sendMessage(ChatColor.YELLOW + "You licked " + ChatColor.LIGHT_PURPLE + licked.getDisplayName() + ChatColor.YELLOW + ". Rekt.");
-                licked.sendMessage(ChatColor.YELLOW + "Kennon has licked you. You have been washed. You're welcome.");
-                licked.getWorld().spigot().playEffect(licked.getLocation(), Effect.POTION_BREAK, 16389, 1, 1, 1, 1, 1, 1, 20);
+                lickPlayer(licked, kennon);
                 return true;
 
             } catch (Exception ignored) {
@@ -46,6 +50,12 @@ public class KennonCommands implements CommandExecutor {
             }
 
         } else if (cmd.getName().equalsIgnoreCase("pet")) {
+            if (args[0].equalsIgnoreCase("*")) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    petPlayer(p, kennon);
+                }
+                return true;
+            }
             try {
                 Player petted = Bukkit.getPlayer(args[0]);
 
@@ -57,11 +67,7 @@ public class KennonCommands implements CommandExecutor {
                     return true;
                 }
 
-                kennon.sendMessage(ChatColor.YELLOW + "You petted " + ChatColor.LIGHT_PURPLE + petted.getDisplayName() + ChatColor.YELLOW + ".");
-                petted.sendMessage(ChatColor.YELLOW + "Kennon is petting you!");
-                petted.sendMessage(ChatColor.LIGHT_PURPLE + "Petpetpetpetpetpetpetpetpetpetpetpetpetpetpetpetpet");
-                petted.sendMessage(ChatColor.LIGHT_PURPLE + "Petpetpetpetpetpetpetpetpetpetpetpetpetpetpetpetpet");
-                petted.getWorld().spigot().playEffect(petted.getLocation(), Effect.POTION_BREAK, 16388, 1, 1, 1, 1, 1, 1, 20);
+                petPlayer(petted, kennon);
                 return true;
 
             } catch (Exception ignored) {
@@ -69,5 +75,19 @@ public class KennonCommands implements CommandExecutor {
             }
         }
         return true;
+    }
+
+    private void lickPlayer(Player p, Player kennon) {
+        kennon.sendMessage(ChatColor.YELLOW + "You licked " + ChatColor.LIGHT_PURPLE + p.getDisplayName() + ChatColor.YELLOW + ". Rekt.");
+        p.sendMessage(ChatColor.YELLOW + "Kennon has licked you. You have been washed. You're welcome.");
+        p.getWorld().spigot().playEffect(p.getLocation(), Effect.POTION_BREAK, 16389, 1, 1, 1, 1, 1, 1, 20);
+    }
+
+    private void petPlayer(Player p, Player kennon) {
+        kennon.sendMessage(ChatColor.YELLOW + "You petted " + ChatColor.LIGHT_PURPLE + p.getDisplayName() + ChatColor.YELLOW + ".");
+        p.sendMessage(ChatColor.YELLOW + "Kennon is petting you!");
+        p.sendMessage(ChatColor.LIGHT_PURPLE + "Petpetpetpetpetpetpetpetpetpetpetpetpetpetpetpetpet");
+        p.sendMessage(ChatColor.LIGHT_PURPLE + "Petpetpetpetpetpetpetpetpetpetpetpetpetpetpetpetpet");
+        p.getWorld().spigot().playEffect(p.getLocation(), Effect.POTION_BREAK, 16388, 1, 1, 1, 1, 1, 1, 20);
     }
 }
