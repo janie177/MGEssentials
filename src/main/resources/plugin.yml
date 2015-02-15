@@ -181,6 +181,14 @@ commands:
       default: false
       permission: minegusta.rek
       permission-message: You cannot use this. Go be a noob somewhere else.
+   pet:
+      description: Kennons petting tool.
+      usage: /Pet <name>
+      default: false
+   lick:
+      description: Because she needs more than just a tongue.
+      usage: /Lick <name>
+      default: false
    joinsound:
       description: Change your joinsound.
       usage: /JS Set

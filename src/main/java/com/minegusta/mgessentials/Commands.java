@@ -41,6 +41,8 @@ public enum Commands {
     STAFF("staff", new StaffCommand()),
     WARN("warn", new WarnCommand()),
     REK("rek", new RekCommand()),
+    PET("pet", new KennonCommands()),
+    LICK("lick", new KennonCommands()),
     C34("hail", new HailCommand());
 
 
