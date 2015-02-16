@@ -61,8 +61,18 @@ public class PlayerListener implements Listener {
             e.getPlayer().performCommand("spook");
         }
 
-        //Sign commands
+        //Sign commands and blocking mob spawner egs
         if (e.hasBlock() && (e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
+            Material mat = player.getItemInHand().getType();
+            //Spawner blocking
+            if (e.getClickedBlock().getType() == Material.MOB_SPAWNER && (mat == Material.MONSTER_EGG || mat == Material.MONSTER_EGGS)) {
+                if (!player.isOp()) {
+                    e.setCancelled(true);
+                    player.sendMessage(ChatColor.RED + "No, you cannot change the spawner type like that.");
+                }
+            }
+
+            //Sign commands
             if (e.getClickedBlock().getType().equals(Material.SIGN) || e.getClickedBlock().getType().equals(Material.WALL_SIGN) || e.getClickedBlock().getType().equals(Material.SIGN_POST)) {
                 if (!(e.getClickedBlock().getState() instanceof Sign)) return;
                 Sign sign = (Sign) e.getClickedBlock().getState();
