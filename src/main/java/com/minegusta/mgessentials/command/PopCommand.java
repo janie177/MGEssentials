@@ -18,7 +18,7 @@ public class PopCommand implements CommandExecutor {
         } else {
             if (TempData.popMap.containsKey(s.getName().toLowerCase()) && TempData.popMap.get(s.getName().toLowerCase())) {
                 TempData.popMap.put(s.getName().toLowerCase(), false);
-                s.sendMessage(ChatColor.GOLD + "Pop disabled. Please come again.");
+                s.sendMessage(ChatColor.GOLD + "Pop disabled! Please come again.");
             } else {
                 TempData.popMap.put(s.getName().toLowerCase(), true);
                 s.sendMessage(ChatColor.GOLD + "Pop enabled. Let the games begin!");
