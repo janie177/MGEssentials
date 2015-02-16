@@ -69,6 +69,7 @@ public class PlayerListener implements Listener {
                 if (!player.isOp()) {
                     e.setCancelled(true);
                     player.sendMessage(ChatColor.RED + "No, you cannot change the spawner type like that.");
+                    return;
                 }
             }
 
