@@ -106,7 +106,7 @@ public class PvpBot {
         v.setBaby(false);
         v.setCustomNameVisible(true);
         v.setCustomName(name);
-        v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 120, 10));
+        v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 180, 10));
         v.setVillager(false);
         v.setHealth(health / 2 + 1);
         v.getEquipment().setArmorContents(armour);
