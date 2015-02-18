@@ -38,8 +38,6 @@ public class Main extends JavaPlugin {
         //Start the save task
         SAVETASK = SaveTask.startTask();
 
-        //Start the combat task
-        COMBATTASK = CombatTask.start();
 
         //Start the particle task
         PARTICLETASK = ParticleTask.start();
@@ -55,7 +53,13 @@ public class Main extends JavaPlugin {
         }
 
         //Register the PVPlog listener by hand IF enabled.
-        if (MainConfig.getPvpBotEnabled()) Bukkit.getPluginManager().registerEvents(new PvpLogListener(), this);
+        if (MainConfig.getPvpBotEnabled()) {
+            Bukkit.getPluginManager().registerEvents(new PvpLogListener(), this);
+
+            //Start the combat task
+            COMBATTASK = CombatTask.start();
+
+        }
 
 
     }
