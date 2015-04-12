@@ -1,6 +1,7 @@
 package com.minegusta.mgessentials.pvplog;
 
 import com.google.common.collect.Maps;
+import com.minegusta.mgessentials.util.WGUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
@@ -49,7 +50,9 @@ public class PvpLogListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEvent(PlayerQuitEvent e) {
         if (inCombat.containsKey(e.getPlayer().getUniqueId().toString())) {
-            LogData.add(e.getPlayer(), new PvpBot(e.getPlayer()));
+            if (WGUtil.canPVP(e.getPlayer())) {
+                LogData.add(e.getPlayer(), new PvpBot(e.getPlayer()));
+            }
         }
 
     }

@@ -1,6 +1,7 @@
 name: MGEssentials
 main: com.minegusta.mgessentials.Main
 version: ${project.version}
+softdepend: [WorldGuard]
 author: janie177
 commands:
    explode:

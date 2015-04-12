@@ -18,6 +18,7 @@ public class Main extends JavaPlugin {
 
     public static Plugin PLUGIN;
     private static int SAVETASK, PARTICLETASK, COMBATTASK;
+    private static boolean WG_ENABLED = false;
 
     public void onEnable() {
         //Setting the Plugin
@@ -58,10 +59,14 @@ public class Main extends JavaPlugin {
 
             //Start the combat task
             COMBATTASK = CombatTask.start();
-
         }
 
+        WG_ENABLED = Bukkit.getPluginManager().isPluginEnabled("WorldGuard");
 
+    }
+
+    public static boolean isWGEnabled() {
+        return WG_ENABLED;
     }
 
     public void onDisable() {
