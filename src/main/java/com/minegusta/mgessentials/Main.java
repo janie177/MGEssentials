@@ -4,7 +4,7 @@ import com.minegusta.mgessentials.data.MainConfig;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
 import com.minegusta.mgessentials.pvplog.LogData;
 import com.minegusta.mgessentials.pvplog.LogoutManager;
-import com.minegusta.mgessentials.pvplog.PvpBot;
+import com.minegusta.mgessentials.pvplog.PVPBot;
 import com.minegusta.mgessentials.pvplog.PvpLogListener;
 import com.minegusta.mgessentials.tasks.CombatTask;
 import com.minegusta.mgessentials.tasks.ParticleTask;
@@ -19,6 +19,7 @@ public class Main extends JavaPlugin {
     public static Plugin PLUGIN;
     private static int SAVETASK, PARTICLETASK, COMBATTASK;
     private static boolean WG_ENABLED = false;
+    private static boolean CHITCHAT_ENABLED = false;
 
     public void onEnable() {
         //Setting the Plugin
@@ -38,7 +39,6 @@ public class Main extends JavaPlugin {
 
         //Start the save task
         SAVETASK = SaveTask.startTask();
-
 
         //Start the particle task
         PARTICLETASK = ParticleTask.start();
@@ -62,18 +62,22 @@ public class Main extends JavaPlugin {
         }
 
         WG_ENABLED = Bukkit.getPluginManager().isPluginEnabled("WorldGuard");
-
+        CHITCHAT_ENABLED = Bukkit.getPluginManager().isPluginEnabled("Chitchat");
     }
 
     public static boolean isWGEnabled() {
         return WG_ENABLED;
     }
 
+    public static boolean isChitchatEnabled() {
+        return CHITCHAT_ENABLED;
+    }
+
     public void onDisable() {
 
         //Remove all bots just in case
         if (MainConfig.getPvpBotEnabled()) {
-            for (PvpBot bot : LogData.logMap.values()) {
+            for (PVPBot bot : LogData.logMap.values()) {
                 bot.removeBot();
                 bot.stop();
             }

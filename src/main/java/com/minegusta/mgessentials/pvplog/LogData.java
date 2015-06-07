@@ -9,12 +9,12 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 
 public class LogData {
-    public static ConcurrentMap<String, PvpBot> logMap = Maps.newConcurrentMap();
+    public static ConcurrentMap<String, PVPBot> logMap = Maps.newConcurrentMap();
     public static ConcurrentMap<String, Boolean> bots = Maps.newConcurrentMap();
     public static ConcurrentMap<String, List<Chunk>> chunkMap = Maps.newConcurrentMap();
 
 
-    public static void add(Player p, PvpBot bot) {
+    public static void add(Player p, PVPBot bot) {
         logMap.put(p.getUniqueId().toString(), bot);
     }
 
@@ -26,7 +26,7 @@ public class LogData {
         if (logMap.containsKey(uuid.toString())) logMap.remove(uuid.toString());
     }
 
-    public static PvpBot get(Player p) {
+    public static PVPBot get(Player p) {
         return logMap.get(p.getUniqueId().toString());
     }
 

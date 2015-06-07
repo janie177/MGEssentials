@@ -51,7 +51,7 @@ public class PvpLogListener implements Listener {
     public void onEvent(PlayerQuitEvent e) {
         if (inCombat.containsKey(e.getPlayer().getUniqueId().toString())) {
             if (WGUtil.canPVP(e.getPlayer())) {
-                LogData.add(e.getPlayer(), new PvpBot(e.getPlayer()));
+                LogData.add(e.getPlayer(), new PVPBot(e.getPlayer()));
             }
         }
 

@@ -1,8 +1,11 @@
 package com.minegusta.mgessentials.listener;
 
+import com.demigodsrpg.chitchat.Chitchat;
+import com.minegusta.mgessentials.Main;
 import com.minegusta.mgessentials.data.TempData;
 import com.minegusta.mgessentials.ghost.GhostManager;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
@@ -20,8 +23,6 @@ import java.util.Random;
 import java.util.UUID;
 
 public class PlayerListener implements Listener {
-
-
     //JoinSounds
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onLogIn(PlayerJoinEvent e) {
@@ -29,9 +30,17 @@ public class PlayerListener implements Listener {
 
         if (JoinSoundManager.hasJoinSound(uuid)) {
             JoinSoundManager.playSound(uuid);
-            e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', JoinSoundManager.getMessage(uuid)));
+            if (Main.isChitchatEnabled() && (e.getPlayer().hasPermission("minegusta.rank.donor100")
+                    || e.getPlayer().hasPermission("minegusta.jointitle"))) {
+                e.setJoinMessage("");
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    Chitchat.sendTitle(online, 10, 20, 10, "", JoinSoundManager.getMessage(uuid));
+                }
+            } else {
+                e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', JoinSoundManager.getMessage(uuid)));
+            }
         }
-        if (TempData.massMute) e.setJoinMessage(" ");
+        if (TempData.massMute) e.setJoinMessage("");
 
         //Spook check (Warning, really spooky)
         if (TempData.ghostMode) {
@@ -48,7 +57,6 @@ public class PlayerListener implements Listener {
         if (item.getType().equals(Material.CHEST) && item.getItemMeta().hasLore() && item.getItemMeta().getLore().toString().contains("Rightclick the air to open!")) {
             e.setCancelled(true);
         }
-
     }
 
     //Open Mystery Box and Sign commands

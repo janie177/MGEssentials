@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.List;
 import java.util.UUID;
 
-public class PvpBot {
+public class PVPBot {
     private UUID uuid;
     private Location loc;
     private String name;
@@ -26,7 +26,7 @@ public class PvpBot {
     private ItemStack[] armour;
     private List<Chunk> chunks = Lists.newArrayList();
 
-    public PvpBot(Player p) {
+    public PVPBot(Player p) {
         this.uuid = p.getUniqueId();
         this.loc = p.getLocation();
         this.name = p.getName();
