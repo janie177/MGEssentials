@@ -1,7 +1,7 @@
 name: MGEssentials
 main: com.minegusta.mgessentials.Main
 version: ${project.version}
-softdepend: [WorldGuard]
+softdepend: [Chitchat, WorldGuard]
 author: janie177
 commands:
    explode:
@@ -293,3 +293,6 @@ permissions:
      default: op
      permission: minegusta.rek
      permission-message: You cannot use this. Go cri.
+   minegusta.jointitle:
+     description: Join titles ftw
+     default: op

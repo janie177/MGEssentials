@@ -17,7 +17,6 @@ public class JoinSoundManager {
 
     public static void createOrLoadPointsFile(Plugin p) {
         try {
-
             file = new File(p.getDataFolder(), "joinsounds.yml");
 
             if (!file.exists()) {
@@ -48,7 +47,6 @@ public class JoinSoundManager {
     }
 
     public static String getMessage(UUID p) {
-
         String[] parts = conf.getString(p.toString()).split("%and%");
         return ChatColor.translateAlternateColorCodes('&', parts[0]);
 
