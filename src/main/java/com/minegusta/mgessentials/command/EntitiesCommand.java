@@ -36,6 +36,7 @@ public class EntitiesCommand implements CommandExecutor {
             return true;
         }
 
+        s.sendMessage(ChatColor.RED + "- - - " + ChatColor.DARK_RED + "Entities in world: " + w.getName() + ChatColor.RED + " - - -");
         for (EntityType type : EntityType.values()) {
 
             int amount = 0;
