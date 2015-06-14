@@ -7,8 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class EntitiesCommand implements CommandExecutor {
@@ -39,16 +39,32 @@ public class EntitiesCommand implements CommandExecutor {
         for (EntityType type : EntityType.values()) {
 
             int amount = 0;
-            String name = type.getName();
+            String name = type.name();
 
-            for (LivingEntity ent : w.getLivingEntities()) {
+            for (Entity ent : w.getEntities()) {
                 if (ent.getType() == type) {
                     amount++;
                 }
             }
 
-            p.sendMessage(ChatColor.YELLOW + "Number of " + name + ": " + ChatColor.LIGHT_PURPLE + amount);
+            p.sendMessage(ChatColor.YELLOW + "Number of " + name + ": " + getColor(amount) + amount);
         }
         return true;
+    }
+
+    private ChatColor getColor(int i) {
+        if (i < 100) {
+            return ChatColor.GREEN;
+        }
+        if (i < 500) {
+            return ChatColor.GOLD;
+        }
+
+        if (i < 1000) {
+            return ChatColor.RED;
+        }
+
+        return ChatColor.DARK_RED;
+
     }
 }
