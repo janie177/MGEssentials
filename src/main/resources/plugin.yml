@@ -197,6 +197,11 @@ commands:
       default: false
       permission: minegusta.joinsound
       permission-message: You cannot use this. Go cri.
+   entities:
+      description: Count entities ingame.
+      usage: /Entities
+      default: false
+      permission-message: You cannot use this. Go cri.
    massmute:
       description: Mute the server except for the staff.
       usage: /MassMute

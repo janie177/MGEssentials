@@ -43,6 +43,7 @@ public enum Commands {
     REK("rek", new RekCommand()),
     PET("pet", new KennonCommands()),
     LICK("lick", new KennonCommands()),
+    ENTITIES("entities", new EntitiesCommand()),
     C34("hail", new HailCommand());
 
 
