@@ -14,15 +14,12 @@ public class DiscoCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command c, String label, String[] args) {
         if (c.getName().equalsIgnoreCase("disco") && sender.hasPermission("minegusta.disco")) {
-            if (sender instanceof ConsoleCommandSender) return false;
+            if (sender instanceof ConsoleCommandSender || !sender.isOp()) return false;
             for (int i = 0; i < 600; i++) {
                 Player player = (Player) sender;
                 final Location location = player.getLocation();
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.PLUGIN, new Runnable() {
-                    @Override
-                    public void run() {
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.PLUGIN, () -> {
                         disco(location);
-                    }
                 }, i);
             }
             return true;
