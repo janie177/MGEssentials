@@ -33,7 +33,7 @@ public class RandomSpawnCommand implements CommandExecutor {
 
         Location l = new Location(p.getWorld(), getRandomCoordinate(), 100, getRandomCoordinate());
 
-        int y = l.getWorld().getHighestBlockYAt((int) l.getX(), (int) l.getZ()) + 2;
+        int y = l.getWorld().getHighestBlockYAt((int) l.getX(), (int) l.getZ()) + 4;
         l.setY(y);
 
         p.teleport(l);
