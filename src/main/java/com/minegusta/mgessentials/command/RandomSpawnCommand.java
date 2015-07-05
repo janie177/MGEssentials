@@ -31,10 +31,12 @@ public class RandomSpawnCommand implements CommandExecutor {
 
         s.sendMessage(ChatColor.YELLOW + "You have been teleported to a random location!");
 
-        Location l = new Location(p.getWorld(), getRandomCoordinate(), 100, getRandomCoordinate());
+        int x = getRandomCoordinate();
+        int z = getRandomCoordinate();
+        int y = p.getWorld().getHighestBlockYAt(x, z) + 4;
 
-        int y = l.getWorld().getHighestBlockYAt((int) l.getX(), (int) l.getZ()) + 4;
-        l.setY(y);
+        Location l = new Location(p.getWorld(), x, y, z);
+        if (!l.getChunk().isLoaded()) l.getChunk().load();
 
         p.teleport(l);
 
