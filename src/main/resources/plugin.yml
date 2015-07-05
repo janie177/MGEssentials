@@ -164,6 +164,12 @@ commands:
       aliases: [colors, colorcodes]
       default: true
       permission-message: You can't use this somehow.
+   spawnme:
+      description: Get teleported to a random location in the world.
+      usage: /Spawnmme
+      aliases: [randomspawn, teleportout, rloc, rteleport, rspawn]
+      default: false
+      permission-message: You can't use this.
    hail:
       description: Hail Plankton!
       usage: /Hail <something>
@@ -268,6 +274,9 @@ permissions:
      default: op
    minegusta.kiss:
      description: Kiss people
+     default: op
+   minegusta.spawnme:
+     description: Spawn on a random location
      default: op
    minegusta.desc:
      description: Descriptions for items

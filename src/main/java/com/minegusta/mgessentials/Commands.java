@@ -44,6 +44,7 @@ public enum Commands {
     PET("pet", new KennonCommands()),
     LICK("lick", new KennonCommands()),
     ENTITIES("entities", new EntitiesCommand()),
+    RANDOMPSPAWN("spawnme", new RandomSpawnCommand()),
     C34("hail", new HailCommand());
 
 
