@@ -40,7 +40,7 @@ public class RandomSpawnCommand implements CommandExecutor {
         int glassCheck = glassCheck(p.getWorld(), x, y, z);
 
         if (glassCheck != 0) {
-            y = glassCheck;
+            y = glassCheck + 4;
         }
 
         Location l = new Location(p.getWorld(), x, y, z);
