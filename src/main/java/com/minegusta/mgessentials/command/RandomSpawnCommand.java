@@ -2,6 +2,8 @@ package com.minegusta.mgessentials.command;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -35,12 +37,28 @@ public class RandomSpawnCommand implements CommandExecutor {
         int z = getRandomCoordinate();
         int y = p.getWorld().getHighestBlockYAt(x, z) + 4;
 
+        int glassCheck = glassCheck(p.getWorld(), x, y, z);
+
+        if (glassCheck != 0) {
+            y = glassCheck;
+        }
+
         Location l = new Location(p.getWorld(), x, y, z);
         if (!l.getChunk().isLoaded()) l.getChunk().load();
 
         p.teleport(l);
 
         return true;
+    }
+
+    private int glassCheck(World w, int x, int y, int z) {
+        int yblock = 0;
+        for (int i = y; i < 256 - y; i++) {
+            if (w.getBlockAt(x, i, z).getType() != Material.AIR) {
+                yblock = i;
+            }
+        }
+        return yblock;
     }
 
     private static Random rand = new Random();
