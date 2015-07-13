@@ -17,7 +17,10 @@ public class VotePointsCommand implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("votepoints")) {
             if (args.length < 2) {
-                if (args[0].equalsIgnoreCase("top")) {
+                if (args.length == 0) {
+                    sendInfo(s);
+                    return true;
+                } else if (args[0].equalsIgnoreCase("top")) {
                     s.sendMessage(ChatColor.GOLD + " --- Top Voters ---");
                     VotePointsDataManager.getMostVotes().stream().forEach(string -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getPlayer(UUID.fromString(string))));
                     return true;
@@ -26,12 +29,7 @@ public class VotePointsCommand implements CommandExecutor {
                     VotePointsDataManager.clearMonthlyVotes();
                     return true;
                 }
-                s.sendMessage(ChatColor.YELLOW + " - - - - -");
-                s.sendMessage(ChatColor.GRAY + " /Votepoints top");
-                s.sendMessage(ChatColor.GRAY + " /Votepoints cleartopresetdeathdontusethis");
-                s.sendMessage(ChatColor.GRAY + " /Votepoints add [name]");
-                s.sendMessage(ChatColor.GRAY + " /Votepoints reset [name]");
-                s.sendMessage(ChatColor.YELLOW + " - - - - -");
+                sendInfo(s);
                 return true;
             }
             try {
@@ -49,5 +47,14 @@ public class VotePointsCommand implements CommandExecutor {
             }
         }
         return true;
+    }
+
+    private void sendInfo(CommandSender s) {
+        s.sendMessage(ChatColor.YELLOW + " - - - - -");
+        s.sendMessage(ChatColor.GRAY + " /Votepoints top");
+        s.sendMessage(ChatColor.GRAY + " /Votepoints cleartopresetdeathdontusethis");
+        s.sendMessage(ChatColor.GRAY + " /Votepoints add [name]");
+        s.sendMessage(ChatColor.GRAY + " /Votepoints reset [name]");
+        s.sendMessage(ChatColor.YELLOW + " - - - - -");
     }
 }
