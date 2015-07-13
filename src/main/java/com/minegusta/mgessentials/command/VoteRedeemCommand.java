@@ -19,16 +19,18 @@ public class VoteRedeemCommand implements CommandExecutor {
     public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("vote")) {
             if (s instanceof ConsoleCommandSender) return false;
+
             Player p = (Player) s;
-            if (p.getWorld().getName().equalsIgnoreCase("donator")) {
-                p.sendMessage(ChatColor.DARK_RED + "You cannot redeem mystery boxes in this world!");
-                return true;
-            } else if (!(VotePointsDataManager.getPlayerVotes(p.getUniqueId()) > 0)) {
-                p.sendMessage(ChatColor.DARK_RED + "You did not vote!" + ChatColor.YELLOW + " http://www.minegusta.com/vote.php");
+
+            if (!(VotePointsDataManager.getPlayerVotes(p.getUniqueId()) > 0)) {
+                p.sendMessage(ChatColor.DARK_RED + "You have no redeems left!" + ChatColor.YELLOW + " http://www.minegusta.com/vote.php");
+                p.sendMessage(ChatColor.YELLOW + "You voted " + ChatColor.LIGHT_PURPLE + VotePointsDataManager.getMonthlyVotes(p.getUniqueId().toString()) + ChatColor.YELLOW + " times this month.");
                 return true;
             } else {
                 VotePointsDataManager.removeUnclaimedVote(p.getUniqueId());
                 p.sendMessage(ChatColor.YELLOW + "You redeemed a vote and you have " + ChatColor.AQUA + VotePointsDataManager.getPlayerVotes(p.getUniqueId()) + ChatColor.YELLOW + " redeems left.");
+                p.sendMessage(ChatColor.YELLOW + "You voted " + ChatColor.LIGHT_PURPLE + VotePointsDataManager.getMonthlyVotes(p.getUniqueId().toString()) + ChatColor.YELLOW + " times this month.");
+                p.sendMessage(ChatColor.YELLOW + "Earn more redeems at" + ChatColor.BLUE + " http://www.minegusta.com/vote.php");
                 p.getInventory().addItem(getBox());
                 p.updateInventory();
             }

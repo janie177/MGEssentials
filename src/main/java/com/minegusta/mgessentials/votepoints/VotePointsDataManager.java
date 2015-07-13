@@ -64,6 +64,17 @@ public class VotePointsDataManager {
         return users;
     }
 
+    public static List<String> getMoreThan(int amount) {
+        List<String> users = Lists.newArrayList();
+
+        for (String s : conf.getKeys(false)) {
+            if (getMonthlyVotes(s) >= amount) {
+                users.add(s);
+            }
+        }
+        return users;
+    }
+
     public static void clearMonthlyVotes() {
         for (String s : conf.getKeys(false)) {
             conf.set(s + ".monthly", 0);

@@ -33,19 +33,25 @@ public class VotePointsCommand implements CommandExecutor {
                 return true;
             }
             try {
-
-                UUID uuid = Bukkit.getPlayer(args[1]).getUniqueId();
-
                 if (args[0].equalsIgnoreCase("add")) {
+                    UUID uuid = Bukkit.getPlayer(args[1]).getUniqueId();
                     VotePointsDataManager.addVote(uuid);
-
+                    return true;
+                } else if (args[0].equalsIgnoreCase("get")) {
+                    int amount = Integer.parseInt(args[1]);
+                    s.sendMessage(ChatColor.GOLD + "--Players with more than " + amount + " votes--");
+                    VotePointsDataManager.getMoreThan(amount).stream().forEach(uuid -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getPlayer(UUID.fromString(uuid))));
+                    return true;
                 } else if (args[0].equalsIgnoreCase("reset")) {
+                    UUID uuid = Bukkit.getPlayer(args[1]).getUniqueId();
                     VotePointsDataManager.resetvotes(uuid);
+                    return true;
                 }
             } catch (Exception e) {
 
             }
         }
+        sendInfo(s);
         return true;
     }
 
@@ -54,6 +60,7 @@ public class VotePointsCommand implements CommandExecutor {
         s.sendMessage(ChatColor.GRAY + " /Votepoints top");
         s.sendMessage(ChatColor.GRAY + " /Votepoints cleartopresetdeathdontusethis");
         s.sendMessage(ChatColor.GRAY + " /Votepoints add [name]");
+        s.sendMessage(ChatColor.GRAY + " /Votepoints get [amount]");
         s.sendMessage(ChatColor.GRAY + " /Votepoints reset [name]");
         s.sendMessage(ChatColor.YELLOW + " - - - - -");
     }
