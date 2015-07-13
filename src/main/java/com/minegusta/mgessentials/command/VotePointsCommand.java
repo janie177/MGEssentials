@@ -40,7 +40,7 @@ public class VotePointsCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("get")) {
                     int amount = Integer.parseInt(args[1]);
                     s.sendMessage(ChatColor.GOLD + "--Players with more than " + amount + " votes--");
-                    VotePointsDataManager.getMoreThan(amount).stream().forEach(uuid -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getPlayer(UUID.fromString(uuid))));
+                    VotePointsDataManager.getMoreThan(amount).stream().forEach(uuid -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getPlayer(UUID.fromString(uuid)).getName()));
                     return true;
                 } else if (args[0].equalsIgnoreCase("reset")) {
                     UUID uuid = Bukkit.getPlayer(args[1]).getUniqueId();
