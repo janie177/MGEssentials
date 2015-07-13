@@ -22,7 +22,7 @@ public class VotePointsCommand implements CommandExecutor {
                     return true;
                 } else if (args[0].equalsIgnoreCase("top")) {
                     s.sendMessage(ChatColor.GOLD + " --- Top Voters ---");
-                    VotePointsDataManager.getMostVotes().stream().forEach(string -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getPlayer(UUID.fromString(string))));
+                    VotePointsDataManager.getMostVotes().stream().forEach(string -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getPlayer(UUID.fromString(string)).getName()));
                     return true;
                 } else if (args[0].equalsIgnoreCase("cleartopresetdeathdontusethis")) {
                     s.sendMessage(ChatColor.YELLOW + "Monthly votes cleared.");
