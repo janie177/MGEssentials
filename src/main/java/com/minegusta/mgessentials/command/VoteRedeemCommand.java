@@ -27,7 +27,7 @@ public class VoteRedeemCommand implements CommandExecutor {
                 p.sendMessage(ChatColor.DARK_RED + "You did not vote!" + ChatColor.YELLOW + " http://www.minegusta.com/vote.php");
                 return true;
             } else {
-                VotePointsDataManager.removePoints(p.getUniqueId());
+                VotePointsDataManager.removeUnclaimedVote(p.getUniqueId());
                 p.sendMessage(ChatColor.YELLOW + "You redeemed a vote and you have " + ChatColor.AQUA + VotePointsDataManager.getPlayerVotes(p.getUniqueId()) + ChatColor.YELLOW + " redeems left.");
                 p.getInventory().addItem(getBox());
                 p.updateInventory();
