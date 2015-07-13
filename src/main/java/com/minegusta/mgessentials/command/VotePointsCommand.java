@@ -22,7 +22,7 @@ public class VotePointsCommand implements CommandExecutor {
                     return true;
                 } else if (args[0].equalsIgnoreCase("top")) {
                     s.sendMessage(ChatColor.GOLD + " --- Top Voters ---");
-                    VotePointsDataManager.getMostVotes().stream().forEach(string -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getPlayer(UUID.fromString(string)).getName()));
+                    VotePointsDataManager.getMostVotes().stream().forEach(string -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getOfflinePlayer(UUID.fromString(string)).getName()));
                     return true;
                 } else if (args[0].equalsIgnoreCase("cleartopresetdeathdontusethis")) {
                     s.sendMessage(ChatColor.YELLOW + "Monthly votes cleared.");
@@ -40,7 +40,7 @@ public class VotePointsCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("get")) {
                     int amount = Integer.parseInt(args[1]);
                     s.sendMessage(ChatColor.GOLD + "--Players with more than " + amount + " votes--");
-                    VotePointsDataManager.getMoreThan(amount).stream().forEach(uuid -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getPlayer(UUID.fromString(uuid)).getName()));
+                    VotePointsDataManager.getMoreThan(amount).stream().forEach(uuid -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getOfflinePlayer(UUID.fromString(uuid)).getName()));
                     return true;
                 } else if (args[0].equalsIgnoreCase("reset")) {
                     UUID uuid = Bukkit.getPlayer(args[1]).getUniqueId();
