@@ -57,7 +57,7 @@ public class PlayerListener implements Listener {
         if (e.getInventory().getType() == InventoryType.WORKBENCH && CraftCommand.craftingInstances.containsKey(e.getInventory())) {
             Player p = (Player) e.getPlayer();
             for (ItemStack i : e.getInventory()) {
-                p.getWorld().dropItemNaturally(p.getLocation(), i);
+                if (i != null) p.getWorld().dropItemNaturally(p.getLocation(), i);
             }
 
             CraftCommand.craftingInstances.remove(e.getInventory());
