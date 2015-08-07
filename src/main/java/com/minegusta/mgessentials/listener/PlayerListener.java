@@ -54,7 +54,7 @@ public class PlayerListener implements Listener {
     //Crafting command listening
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
-        if (e.getInventory().getType() == InventoryType.CRAFTING && CraftCommand.craftingInstances.containsKey(e.getInventory())) {
+        if (e.getInventory().getType() == InventoryType.WORKBENCH && CraftCommand.craftingInstances.containsKey(e.getInventory())) {
             Player p = (Player) e.getPlayer();
             for (ItemStack i : e.getInventory()) {
                 p.getWorld().dropItemNaturally(p.getLocation(), i);

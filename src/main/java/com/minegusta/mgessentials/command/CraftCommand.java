@@ -19,7 +19,7 @@ public class CraftCommand implements CommandExecutor {
 
         if (s instanceof Player && s.hasPermission("minegusta.craft")) {
             Player p = (Player) s;
-            Inventory inv = Bukkit.createInventory(p, InventoryType.CRAFTING);
+            Inventory inv = Bukkit.createInventory(p, InventoryType.WORKBENCH);
             p.openInventory(inv);
             craftingInstances.put(inv, false);
         }
