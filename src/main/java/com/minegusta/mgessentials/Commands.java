@@ -42,6 +42,8 @@ public enum Commands {
     WARN("warn", new WarnCommand()),
     REK("rek", new RekCommand()),
     PET("pet", new KennonCommands()),
+    CRAFT("craft", new CraftCommand()),
+    TIME("mytime", new TimeCommand()),
     LICK("lick", new KennonCommands()),
     ENTITIES("entities", new EntitiesCommand()),
     RANDOMPSPAWN("spawnme", new RandomSpawnCommand()),

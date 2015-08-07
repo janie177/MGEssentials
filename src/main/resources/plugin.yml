@@ -235,6 +235,16 @@ commands:
       usage: /staff
       default: true
       permission-message: Nope, no permissions for you, little one!
+   mytime:
+      description: Change your own time.
+      usage: /mytime 0-23000
+      default: false
+      permission-message: Nope, no permissions for you, little one!
+   craft:
+      description: Open a craftingtable.
+      usage: /Craft
+      default: false
+      permission-message: Nope, no permissions for you, little one!
 permissions:
    minegusta.hug:
      description: hug people
@@ -309,4 +319,10 @@ permissions:
      permission-message: You cannot use this. Go cri.
    minegusta.jointitle:
      description: Join titles ftw
+     default: op
+   minegusta.craft:
+     description: Open a crafting table.
+     default: op
+   minegusta.time:
+     description: Set your own time.
      default: op
