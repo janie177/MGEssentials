@@ -2,7 +2,6 @@ package com.minegusta.mgessentials.listener;
 
 import com.demigodsrpg.chitchat.Chitchat;
 import com.minegusta.mgessentials.Main;
-import com.minegusta.mgessentials.command.CraftCommand;
 import com.minegusta.mgessentials.data.TempData;
 import com.minegusta.mgessentials.ghost.GhostManager;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
@@ -16,8 +15,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -48,19 +45,6 @@ public class PlayerListener implements Listener {
         //Spook check (Warning, really spooky)
         if (TempData.ghostMode) {
             GhostManager.setSpook(e.getPlayer());
-        }
-    }
-
-    //Crafting command listening
-    @EventHandler
-    public void onInventoryClose(InventoryCloseEvent e) {
-        if (e.getInventory().getType() == InventoryType.WORKBENCH && CraftCommand.craftingInstances.containsKey(e.getInventory())) {
-            Player p = (Player) e.getPlayer();
-            for (ItemStack i : e.getInventory()) {
-                if (i != null) p.getWorld().dropItemNaturally(p.getLocation(), i);
-            }
-
-            CraftCommand.craftingInstances.remove(e.getInventory());
         }
     }
 
