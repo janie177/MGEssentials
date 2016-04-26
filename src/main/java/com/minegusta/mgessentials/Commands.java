@@ -26,8 +26,6 @@ public enum Commands {
     C23("swag", new SwagCommand()),
     C25("desc", new RenameCommand()),
     C26("rename", new RenameCommand()),
-    C27("mausmute", new MuteCommand()),
-    C28("mausunmute", new MuteCommand()),
     C29("particle", new EffectCommand()),
     C30("poke", new PokeCommand()),
     C31("votepoints", new VotePointsCommand()),
