@@ -127,16 +127,6 @@ commands:
       usage: /Rename <New name>
       permission: minegusta.rename
       permission-message: You don't have permission to use this. Now die in a corner.
-   mausmute:
-      description: Mute someone like a maus.
-      usage: /MausMute <Name>
-      permission: minegusta.mute
-      permission-message: You don't have permission to use this. Now die in a corner.
-   mausunmute:
-      description: UnMute someone like a maus.
-      usage: /MausUnMute <Name>
-      permission: minegusta.mute
-      permission-message: You don't have permission to use this. Now die in a corner.
    particle:
       description: Spark like edward in the sun.
       usage: /particle
@@ -263,9 +253,6 @@ permissions:
      default: op
    minegusta.massmute:
      description: Turn on/off massmute
-     default: op
-   minegusta.mute:
-     description: mute people
      default: op
    minegusta.explode:
      description: explode someone
