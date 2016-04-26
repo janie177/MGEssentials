@@ -1,7 +1,7 @@
 name: MGEssentials
 main: com.minegusta.mgessentials.Main
 version: ${project.version}
-softdepend: [Chitchat, WorldGuard]
+softdepend: [WorldGuard]
 author: janie177
 commands:
    explode:
@@ -109,6 +109,7 @@ commands:
       default: true
       description: MMMMMMMMMMMMMMMM Riveting
       usage: /kiss <name>
+      permission: minegusta.kiss
       permission-message: awww you can't kiss ;c maybe practise on some dolls?
    swag:
       default: true
@@ -119,7 +120,7 @@ commands:
    desc:
       description: Changes an items description.
       usage: /Desc <Description>
-      permission: minegusta.donator
+      permission: minegusta.desc
       permission-message: You don't have permission to use this. Now die in a corner.
    rename:
       description: Rename the item in your hand.
@@ -239,13 +240,18 @@ commands:
       description: Change your own time.
       usage: /mytime 0-23000
       default: false
+      permission: minegusta.time
       permission-message: Nope, no permissions for you, little one!
    craft:
-      description: Open a craftingtable.
+      description: Open a crafting table.
       usage: /Craft
       default: false
+      permission: minegusta.craft
       permission-message: Nope, no permissions for you, little one!
 permissions:
+   minegusta.silkspawner:
+     description: Mine spawners with silk touch pickaxes.
+     default: op
    minegusta.hug:
      description: hug people
      default: op
@@ -300,8 +306,8 @@ permissions:
    minegusta.rape:
      description: raaaaaaaaaape whistle
      default: op
-   minegusta.donator:
-     description: Is a player a donator?
+   minegusta.donor:
+     description: Is a player a donor?
      default: op
    minegusta.joinsound:
      description: Can this player set joinsounds?
@@ -315,8 +321,6 @@ permissions:
    minegusta.rek:
      description: Rek people!?
      default: op
-     permission: minegusta.rek
-     permission-message: You cannot use this. Go cri.
    minegusta.jointitle:
      description: Join titles ftw
      default: op
@@ -325,4 +329,7 @@ permissions:
      default: op
    minegusta.time:
      description: Set your own time.
+     default: op
+   minegusta.rainbowchat:
+     description: Talk in rainbow using &!.
      default: op

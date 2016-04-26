@@ -12,7 +12,7 @@ public class KissCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender s, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("kiss")) {
+        if (command.getName().equalsIgnoreCase("kiss") && s.hasPermission("minegusta.kiss")) {
             try {
                 Player p = Bukkit.getPlayer(args[0]);
                 if (s.getName().equalsIgnoreCase(args[0])) {

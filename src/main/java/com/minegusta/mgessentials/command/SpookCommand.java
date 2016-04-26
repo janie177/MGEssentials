@@ -32,7 +32,7 @@ public class SpookCommand implements CommandExecutor {
 
                 p.getWorld().spigot().playEffect(p.getLocation(), Effect.PORTAL, 0, 0, 1, 1, 1, 1, 25, 15);
                 p.getWorld().spigot().playEffect(p.getLocation(), Effect.MOBSPAWNER_FLAMES, 0, 0, 1, 1, 1, 1, 25, 15);
-                p.getWorld().playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
+                p.getWorld().playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_GROWL, 1, 1);
 
                 //Create a new cooldown.
                 CoolDown.newCooldown(p.getUniqueId(), TempData.spookMap);
@@ -52,7 +52,7 @@ public class SpookCommand implements CommandExecutor {
                 for (LivingEntity bat : bats) {
                     if (bat != null && !bat.isDead()) {
                         bat.getWorld().spigot().playEffect(bat.getLocation(), Effect.MOBSPAWNER_FLAMES, 0, 0, 1, 1, 1, 1, 12, 25);
-                        bat.getWorld().playSound(bat.getLocation(), Sound.FIREWORK_BLAST, 1, 2);
+                        bat.getWorld().playSound(bat.getLocation(), Sound.ENTITY_FIREWORK_BLAST, 1, 2);
                         bat.remove();
                     }
                 }

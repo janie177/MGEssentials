@@ -23,7 +23,7 @@ public class ChatListener implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void onRainbowChat(AsyncPlayerChatEvent e) {
         String m = e.getMessage();
-        if (m.contains("&!") && e.getPlayer().hasPermission("minegusta.donator")) {
+        if (m.contains("&!") && e.getPlayer().hasPermission("minegusta.rainbowchat")) {
             try {
                 e.setMessage(RainBowStringMaker.rainbowify(m.replace("&!", "")));
             } catch (Exception ignored) {

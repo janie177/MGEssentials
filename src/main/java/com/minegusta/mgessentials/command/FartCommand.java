@@ -34,7 +34,7 @@ public class FartCommand implements CommandExecutor {
     }
 
     public static void fartCloud(Location location) {
-        location.getWorld().playSound(location, Sound.CHICKEN_EGG_POP, 0.5F, 5F);
+        location.getWorld().playSound(location, Sound.ENTITY_CHICKEN_EGG, 0.5F, 5F);
         location.getWorld().spigot().playEffect(location, Effect.SMOKE, 1, 1, 3F, 1F, 3F, 1F, 500, 20);
     }
 }

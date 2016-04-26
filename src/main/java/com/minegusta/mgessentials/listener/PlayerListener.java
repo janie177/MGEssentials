@@ -1,11 +1,8 @@
 package com.minegusta.mgessentials.listener;
 
-import com.demigodsrpg.chitchat.Chitchat;
-import com.minegusta.mgessentials.Main;
 import com.minegusta.mgessentials.data.TempData;
 import com.minegusta.mgessentials.ghost.GhostManager;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
@@ -28,17 +25,9 @@ public class PlayerListener implements Listener {
     public void onLogIn(PlayerJoinEvent e) {
         UUID uuid = e.getPlayer().getUniqueId();
 
-        if (JoinSoundManager.hasJoinSound(uuid)) {
+        if (e.getPlayer().hasPermission("minegusta.jointitle") && JoinSoundManager.hasJoinSound(uuid)) {
             JoinSoundManager.playSound(uuid);
-            if (Main.isChitchatEnabled() && (e.getPlayer().hasPermission("minegusta.rank.donor100")
-                    || e.getPlayer().hasPermission("minegusta.jointitle"))) {
-                e.setJoinMessage("");
-                for (Player online : Bukkit.getOnlinePlayers()) {
-                    Chitchat.sendTitle(online, 10, 20, 10, "", JoinSoundManager.getMessage(uuid));
-                }
-            } else {
-                e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', JoinSoundManager.getMessage(uuid)));
-            }
+            e.setJoinMessage(JoinSoundManager.getMessage(uuid));
         }
         if (TempData.massMute) e.setJoinMessage("");
 

@@ -17,7 +17,7 @@ public class RenameCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(final CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("rename") && sender.hasPermission("minegusta.donator") && sender instanceof Player) {
+        if (command.getName().equalsIgnoreCase("rename") && sender.hasPermission("minegusta.rename") && sender instanceof Player) {
             Player p = (Player) sender;
             if (args.length == 0) {
                 sender.sendMessage(ChatColor.GOLD + "/Rename " + ChatColor.YELLOW + "<New Name> " + ChatColor.DARK_GRAY + ": Lets you rename the held item. Color codes supported!");
@@ -48,7 +48,7 @@ public class RenameCommand implements CommandExecutor {
             }
 
         }
-        if (command.getName().equalsIgnoreCase("desc") && sender.hasPermission("minegusta.donator") && sender instanceof Player && sender.isOp()) {
+        if (command.getName().equalsIgnoreCase("desc") && sender.hasPermission("minegusta.desc") && sender instanceof Player) {
             Player p = (Player) sender;
             if (args.length == 0) {
                 sender.sendMessage(ChatColor.GOLD + "/desc " + ChatColor.YELLOW + "<New Description> " + ChatColor.DARK_GRAY + ": Lets you rename the held item's info. Color codes supported!");

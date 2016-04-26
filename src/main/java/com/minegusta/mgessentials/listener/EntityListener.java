@@ -27,7 +27,7 @@ public class EntityListener implements Listener {
         Entity damager = event.getDamager();
         final Entity entity = event.getEntity();
         if (damager instanceof Player && toggleData.containsKey(((Player) damager).getName().toLowerCase()) && toggleData.get(((Player) damager).getName().toLowerCase())) {
-            entity.getWorld().playSound(entity.getLocation(), Sound.CHICKEN_EGG_POP, 5F, 1F);
+            entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_CHICKEN_EGG, 5F, 1F);
             entity.playEffect(EntityEffect.WOLF_SMOKE);
             Location location = entity.getLocation();
             entity.getWorld().spigot().playEffect(location, Effect.HEART, 1, 1, 0.35F, 1.5F, 0.35F, 0.5F, 15, 5);

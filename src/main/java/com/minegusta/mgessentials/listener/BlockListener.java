@@ -76,7 +76,7 @@ public class BlockListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onMineStuff(BlockBreakEvent e) {
-        if (!(e.isCancelled()) && e.getPlayer().hasPermission("minegusta.donator")) {
+        if (!(e.isCancelled()) && e.getPlayer().hasPermission("minegusta.silkspawner")) {
             Material block = e.getBlock().getType();
             if (block.equals(Material.MOB_SPAWNER)) {
                 if (e.getPlayer().getItemInHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
@@ -158,7 +158,7 @@ public class BlockListener implements Listener {
                         && player.getLocation().getBlock()
                         .getRelative(BlockFace.DOWN, 2).getType().equals(Material.WOOL) && !(player.isSneaking())) {
                     e.setCancelled(true);
-                    player.getWorld().playSound(player.getLocation(), Sound.SLIME_WALK, 0.4F, 0.2F);
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SLIME_JUMP, 0.4F, 0.2F);
                     Vector direction = player.getLocation().getDirection();
                     player.setVelocity(direction.setY(1).multiply(1.1));
                 } else if (player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.WOOL)

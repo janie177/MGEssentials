@@ -36,7 +36,7 @@ public class NukeCommand implements CommandExecutor {
     }
 
     public static void nukeEffect(Location target, int range, int particles, int offSetY) {
-        target.getWorld().playSound(target, Sound.AMBIENCE_CAVE, 1F, 1F);
+        target.getWorld().playSound(target, Sound.AMBIENT_CAVE, 1F, 1F);
         target.getWorld().createExplosion(target.getX(), target.getY() + 3.9 + offSetY, target.getZ(), 6F, false, false);
         target.getWorld().spigot().playEffect(target, Effect.CLOUD, 1, 1, 3F, 0F, 3F, 1F, particles, range);
         target.getWorld().spigot().playEffect(target, Effect.LAVA_POP, 1, 1, 0.4F, 10F, 0.4F, 1F, particles, range);

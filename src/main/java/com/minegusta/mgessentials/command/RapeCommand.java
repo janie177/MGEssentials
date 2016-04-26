@@ -17,12 +17,14 @@ import java.util.List;
 import java.util.Random;
 
 public class RapeCommand implements CommandExecutor {
+
+    private static List<String> help = Lists.newArrayList("/Rape" + ChatColor.GRAY + " - Show this help.", "/Rape <name>" + ChatColor.GRAY + " - Rape a player.", "/Rape <name> [-s] [-v]" + ChatColor.GRAY + " - Rape someone violently, or enable STD's.");
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof ConsoleCommandSender) return false;
         Player p = (Player) sender;
 
-        List<String> help = Lists.newArrayList("/Rape" + ChatColor.GRAY + " - Show this help.", "/Rape <name>" + ChatColor.GRAY + " - Rape a player.", "/Rape <name> [-s] [-v]" + ChatColor.GRAY + " - Rape someone violently, or enable STD's.");
 
         if (cmd.getName().equalsIgnoreCase("rape") && p.hasPermission("minegusta.rape")) {
             try {
@@ -35,8 +37,8 @@ public class RapeCommand implements CommandExecutor {
                     sendText(victim, "You have been raped by " + ChatColor.RED + p.getName() + ChatColor.YELLOW + "!");
                     sendText(p, "You raped " + ChatColor.RED + victim.getName() + ChatColor.YELLOW + "!");
 
-                    sendSound(victim, Sound.SLIME_WALK);
-                    sendSound(victim, Sound.SLIME_WALK2);
+                    sendSound(victim, Sound.ENTITY_SLIME_JUMP);
+                    sendSound(victim, Sound.ENTITY_SLIME_SQUISH);
 
                     victim.getWorld().spigot().playEffect(victim.getLocation(), Effect.HEART, 0, 0, 1, 1, 1, 1, 25, 25);
 
