@@ -59,7 +59,7 @@ public class PlayerListener implements Listener {
 
         //Sign commands and blocking mob spawner egs
         if (e.hasBlock() && (e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
-            Material mat = player.getItemInHand().getType();
+            Material mat = e.getMaterial();
             //Spawner blocking
             if (e.getClickedBlock().getType() == Material.MOB_SPAWNER && (mat == Material.MONSTER_EGG || mat == Material.MONSTER_EGGS)) {
                 if (!player.isOp()) {
@@ -89,20 +89,20 @@ public class PlayerListener implements Listener {
         }
 
         //Mystery boxes
-        if (e.getAction().equals(Action.RIGHT_CLICK_AIR) && player.getItemInHand().getType().equals(Material.CHEST)) {
-            if (!player.getItemInHand().getItemMeta().hasLore()) return;
-            if (player.getItemInHand().getItemMeta().getLore().toString().contains("Rightclick the air to open!")) {
+        if (e.getAction().equals(Action.RIGHT_CLICK_AIR) && e.getMaterial().equals(Material.CHEST)) {
+            if (!player.getInventory().getItemInMainHand().getItemMeta().hasLore()) return;
+            if (player.getInventory().getItemInMainHand().getItemMeta().getLore().toString().contains("Rightclick the air to open!")) {
                 player.sendMessage(ChatColor.DARK_PURPLE + "[Mystery Box]" + ChatColor.AQUA + " You start opening the box....");
-                int oldAmount = player.getItemInHand().getAmount();
+                int oldAmount = player.getInventory().getItemInMainHand().getAmount();
                 int newAmount = oldAmount - 1;
                 if (player.getInventory().firstEmpty() == -1 && newAmount != 0) {
                     player.sendMessage(ChatColor.DARK_PURPLE + "[Mystery Box]" + ChatColor.RED + "You do not have enough space in your inventory.");
                     return;
                 }
                 if (newAmount == 0) {
-                    player.getInventory().removeItem(player.getItemInHand());
+                    player.getInventory().removeItem(player.getInventory().getItemInMainHand());
                 } else {
-                    player.getItemInHand().setAmount(newAmount);
+                    player.getInventory().getItemInMainHand().setAmount(newAmount);
                 }
                 Random rand = new Random();
                 int number = rand.nextInt(55);

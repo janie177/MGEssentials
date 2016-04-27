@@ -65,7 +65,7 @@ public class SpookCommand implements CommandExecutor {
         skeleton.getEquipment().setHelmet(new ItemStack(Material.JACK_O_LANTERN, 1));
         skeleton.setCustomNameVisible(true);
         skeleton.setCustomName(ChatColor.WHITE + "Mr Skeletal");
-        skeleton.getEquipment().setItemInHand(new ItemStack(Material.WOOD_HOE, 1));
+        skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.WOOD_HOE, 1));
 
         bats.add(skeleton);
     }

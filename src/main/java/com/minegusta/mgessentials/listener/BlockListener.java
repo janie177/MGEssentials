@@ -79,7 +79,7 @@ public class BlockListener implements Listener {
         if (!(e.isCancelled()) && e.getPlayer().hasPermission("minegusta.silkspawner")) {
             Material block = e.getBlock().getType();
             if (block.equals(Material.MOB_SPAWNER)) {
-                if (e.getPlayer().getItemInHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
+                if (e.getPlayer().getInventory().getItemInMainHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
                     e.getPlayer().sendMessage(ChatColor.DARK_RED + "You cannot mine spawners with the fortune enchantment.");
                     e.setCancelled(true);
                 } else {

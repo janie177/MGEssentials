@@ -19,11 +19,11 @@ public class GiveAllCommand implements CommandExecutor {
         Player p = (Player) sender;
 
         //In case of air
-        if (p.getItemInHand() == null || p.getItemInHand().getType() == Material.AIR) {
+        if (p.getInventory().getItemInMainHand() == null || p.getInventory().getItemInMainHand().getType() == Material.AIR) {
             p.sendMessage(ChatColor.RED + "That is not an item you silly goat!");
             return true;
         }
-        ItemStack is = p.getItemInHand();
+        ItemStack is = p.getInventory().getItemInMainHand();
 
         //The loop
         for (Player victim : Bukkit.getOnlinePlayers()) {

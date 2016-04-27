@@ -25,7 +25,7 @@ public class RenameCommand implements CommandExecutor {
                 return true;
 
             } else {
-                if (p.getItemInHand().getType().equals(Material.AIR)) {
+                if (p.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
                     p.sendMessage(ChatColor.RED + "[Renamer]" + ChatColor.DARK_RED + "I'm not going to rename your hand!");
                     return true;
                 } else {
@@ -37,7 +37,7 @@ public class RenameCommand implements CommandExecutor {
                         return true;
                     } else {
 
-                        ItemStack item = p.getItemInHand();
+                        ItemStack item = p.getInventory().getItemInMainHand();
                         ItemMeta meta = item.getItemMeta();
                         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', newName));
                         item.setItemMeta(meta);
@@ -55,7 +55,7 @@ public class RenameCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.GOLD + "/Rename " + ChatColor.YELLOW + "<New Name> " + ChatColor.DARK_GRAY + ": Lets you rename the held item. Color codes supported!");
                 return true;
             } else {
-                if (p.getItemInHand().getType().equals(Material.AIR)) {
+                if (p.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
                     p.sendMessage(ChatColor.RED + "[Renamer]" + ChatColor.DARK_RED + "I'm not going to rename your hand!");
                     return true;
                 } else {
@@ -71,7 +71,7 @@ public class RenameCommand implements CommandExecutor {
                     else if (newName.contains("Boots Of The Swift")) return false;
                     else if (newName.contains("God Apple")) return false;
                     else if (newName.contains("Platebody Of Darkness")) return false;
-                    else if (p.getItemInHand().getType().equals(Material.MOB_SPAWNER)) {
+                    else if (p.getInventory().getItemInMainHand().getType().equals(Material.MOB_SPAWNER)) {
                         p.sendMessage(ChatColor.RED + "[Renamer]" + ChatColor.DARK_RED + "You cannot change a mob spawner's meta!");
                     } else {
 
@@ -80,7 +80,7 @@ public class RenameCommand implements CommandExecutor {
                         lore.add(ChatColor.translateAlternateColorCodes('&', newName));
 
 
-                        ItemStack item = p.getItemInHand();
+                        ItemStack item = p.getInventory().getItemInMainHand();
                         ItemMeta meta = item.getItemMeta();
                         meta.setLore(lore);
                         item.setItemMeta(meta);
