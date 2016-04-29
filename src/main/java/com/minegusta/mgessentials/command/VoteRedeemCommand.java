@@ -23,14 +23,14 @@ public class VoteRedeemCommand implements CommandExecutor {
             Player p = (Player) s;
 
             if (!(VotePointsDataManager.getPlayerVotes(p.getUniqueId()) > 0)) {
-                p.sendMessage(ChatColor.DARK_RED + "You have no redeems left!" + ChatColor.YELLOW + " http://www.minegusta.com/vote.php");
-                p.sendMessage(ChatColor.YELLOW + "You voted " + ChatColor.LIGHT_PURPLE + VotePointsDataManager.getMonthlyVotes(p.getUniqueId().toString()) + ChatColor.YELLOW + " times this month.");
+                p.sendMessage(ChatColor.DARK_RED + "You have no redeems left!" + ChatColor.YELLOW + " http://www.minegusta.net/vote.php");
+                p.sendMessage(ChatColor.YELLOW + "You voted " + ChatColor.LIGHT_PURPLE + VotePointsDataManager.getTotalVotes(p.getUniqueId().toString()) + ChatColor.YELLOW + " times in total.");
                 return true;
             } else {
                 VotePointsDataManager.removeUnclaimedVote(p.getUniqueId());
                 p.sendMessage(ChatColor.YELLOW + "You redeemed a vote and you have " + ChatColor.AQUA + VotePointsDataManager.getPlayerVotes(p.getUniqueId()) + ChatColor.YELLOW + " redeems left.");
-                p.sendMessage(ChatColor.YELLOW + "You voted " + ChatColor.LIGHT_PURPLE + VotePointsDataManager.getMonthlyVotes(p.getUniqueId().toString()) + ChatColor.YELLOW + " times this month.");
-                p.sendMessage(ChatColor.YELLOW + "Earn more redeems at" + ChatColor.BLUE + " http://www.minegusta.com/vote.php");
+                p.sendMessage(ChatColor.YELLOW + "You voted " + ChatColor.LIGHT_PURPLE + VotePointsDataManager.getTotalVotes(p.getUniqueId().toString()) + ChatColor.YELLOW + " times in total.");
+                p.sendMessage(ChatColor.YELLOW + "Earn more redeems at" + ChatColor.BLUE + " http://www.minegusta.net/vote.php");
                 p.getInventory().addItem(getBox());
                 p.updateInventory();
             }

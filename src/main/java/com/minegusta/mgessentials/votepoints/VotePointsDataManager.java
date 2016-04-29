@@ -42,8 +42,8 @@ public class VotePointsDataManager {
         return conf.getInt(p.toString() + ".unclaimed", 0);
     }
 
-    public static int getMonthlyVotes(String uuid) {
-        return conf.getInt(uuid + ".monthly", 0);
+    public static int getTotalVotes(String uuid) {
+        return conf.getInt(uuid + ".total", 0);
     }
 
     public static List<String> getMostVotes() {
@@ -51,12 +51,12 @@ public class VotePointsDataManager {
         int highest = 0;
 
         for (String s : conf.getKeys(false)) {
-            int gotten = getMonthlyVotes(s);
+            int gotten = getTotalVotes(s);
             if (gotten > highest) highest = gotten;
         }
 
         for (String s : conf.getKeys(false)) {
-            if (getMonthlyVotes(s) >= highest) {
+            if (getTotalVotes(s) >= highest) {
                 users.add(s);
             }
         }
@@ -68,30 +68,23 @@ public class VotePointsDataManager {
         List<String> users = Lists.newArrayList();
 
         for (String s : conf.getKeys(false)) {
-            if (getMonthlyVotes(s) >= amount) {
+            if (getTotalVotes(s) >= amount) {
                 users.add(s);
             }
         }
         return users;
     }
 
-    public static void clearMonthlyVotes() {
-        for (String s : conf.getKeys(false)) {
-            conf.set(s + ".monthly", 0);
-        }
-
-        save();
-    }
 
     public static void addVote(UUID p) {
         conf.set(p.toString() + ".unclaimed", getPlayerVotes(p) + 1);
-        conf.set(p.toString() + ".monthly", getMonthlyVotes(p.toString()) + 1);
+        conf.set(p.toString() + ".total", getTotalVotes(p.toString()) + 1);
     }
 
     public static void resetvotes(UUID p) {
         if (conf.isSet(p.toString())) {
             conf.set(p.toString() + ".unclaimed", 0);
-            conf.set(p.toString() + ".monthly", 0);
+            conf.set(p.toString() + ".total", 0);
         }
     }
 

@@ -24,10 +24,6 @@ public class VotePointsCommand implements CommandExecutor {
                     s.sendMessage(ChatColor.GOLD + " --- Top Voters ---");
                     VotePointsDataManager.getMostVotes().stream().forEach(string -> s.sendMessage(ChatColor.YELLOW + " - " + Bukkit.getOfflinePlayer(UUID.fromString(string)).getName()));
                     return true;
-                } else if (args[0].equalsIgnoreCase("cleartopresetdeathdontusethis")) {
-                    s.sendMessage(ChatColor.YELLOW + "Monthly votes cleared.");
-                    VotePointsDataManager.clearMonthlyVotes();
-                    return true;
                 }
                 sendInfo(s);
                 return true;
