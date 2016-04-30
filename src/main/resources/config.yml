@@ -3,5 +3,10 @@ give-mystery-box-on-vote: false
 enable-vote-ranks: false
 
 voteranks:
+   beginner: 50
    regular: 100
-   legend: 500
+   advanced: 180
+   epic: 300
+   master: 550
+   tryhard: 920
+   legend: 1500
