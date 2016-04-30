@@ -23,12 +23,12 @@ public class VoteRanks {
 			if (oldVotePoints < value && newVotePoints >= value) {
 				//Derank all other ranks
 				for (String s2 : ranks.keySet()) {
-					Main.PLUGIN.getServer().dispatchCommand(Main.PLUGIN.getServer().getConsoleSender(), "/pex user " + p.getName() + " group remove " + s2);
+					Main.PLUGIN.getServer().dispatchCommand(Main.PLUGIN.getServer().getConsoleSender(), "pex user " + p.getName() + " group remove " + s2);
 				}
 				//Add the new rank
-				Main.PLUGIN.getServer().dispatchCommand(Main.PLUGIN.getServer().getConsoleSender(), "/pex user " + p.getName() + " group add " + s);
+				Main.PLUGIN.getServer().dispatchCommand(Main.PLUGIN.getServer().getConsoleSender(), "pex user " + p.getName() + " group add " + s);
 				p.sendMessage(ChatColor.YELLOW + "Congratulations! You earned the rank " + s.toUpperCase());
-				Bukkit.broadcastMessage(ChatColor.YELLOW + p.getDisplayName() + ChatColor.DARK_PURPLE + " just earned the rank " + ChatColor.GOLD + s.toUpperCase());
+				Bukkit.broadcastMessage(ChatColor.YELLOW + p.getDisplayName() + ChatColor.DARK_PURPLE + " just earned the rank " + ChatColor.GOLD + s.toUpperCase() + ChatColor.DARK_PURPLE + " by voting " + ChatColor.YELLOW + value + ChatColor.DARK_PURPLE + " times!");
 				break;
 			}
 		}
