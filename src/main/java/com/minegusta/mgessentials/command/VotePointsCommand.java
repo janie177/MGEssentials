@@ -65,7 +65,6 @@ public class VotePointsCommand implements CommandExecutor {
     private void sendInfo(CommandSender s) {
         s.sendMessage(ChatColor.YELLOW + " - - - - -");
         s.sendMessage(ChatColor.GRAY + " /Votepoints top");
-        s.sendMessage(ChatColor.GRAY + " /Votepoints cleartopresetdeathdontusethis");
         s.sendMessage(ChatColor.GRAY + " /Votepoints add [name]");
         s.sendMessage(ChatColor.GRAY + " /Votepoints get [amount]");
         s.sendMessage(ChatColor.GRAY + " /Votepoints reset [name]");
