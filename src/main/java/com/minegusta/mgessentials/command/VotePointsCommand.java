@@ -43,6 +43,9 @@ public class VotePointsCommand implements CommandExecutor {
                     }
 
                     VotePointsDataManager.addVote(uuid);
+
+                    p.sendMessage(ChatColor.YELLOW + "You voted and earned a vote point!");
+
                     return true;
                 } else if (args[0].equalsIgnoreCase("get")) {
                     int amount = Integer.parseInt(args[1]);
