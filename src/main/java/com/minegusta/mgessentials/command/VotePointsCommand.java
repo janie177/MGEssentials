@@ -1,11 +1,14 @@
 package com.minegusta.mgessentials.command;
 
+import com.minegusta.mgessentials.data.MainConfig;
 import com.minegusta.mgessentials.votepoints.VotePointsDataManager;
+import com.minegusta.mgessentials.votepoints.VoteRanks;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -30,7 +33,15 @@ public class VotePointsCommand implements CommandExecutor {
             }
             try {
                 if (args[0].equalsIgnoreCase("add")) {
-                    UUID uuid = Bukkit.getPlayer(args[1]).getUniqueId();
+                    Player p = Bukkit.getPlayer(args[1]);
+                    UUID uuid = p.getUniqueId();
+
+                    //Check for rank up
+                    if (MainConfig.voteRanksEnabled()) {
+                        int votes = VotePointsDataManager.getTotalVotes(uuid.toString());
+                        VoteRanks.checkRankUp(p, votes, votes + 1);
+                    }
+
                     VotePointsDataManager.addVote(uuid);
                     return true;
                 } else if (args[0].equalsIgnoreCase("get")) {

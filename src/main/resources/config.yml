@@ -1,1 +1,7 @@
 pvpbot-enabled: false
+give-mystery-box-on-vote: false
+enable-vote-ranks: false
+
+voteranks:
+   regular: 100
+   legend: 500

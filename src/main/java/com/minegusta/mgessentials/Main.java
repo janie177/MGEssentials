@@ -10,6 +10,7 @@ import com.minegusta.mgessentials.tasks.CombatTask;
 import com.minegusta.mgessentials.tasks.ParticleTask;
 import com.minegusta.mgessentials.tasks.SaveTask;
 import com.minegusta.mgessentials.votepoints.VotePointsDataManager;
+import com.minegusta.mgessentials.votepoints.VoteRanks;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -61,6 +62,8 @@ public class Main extends JavaPlugin {
         }
 
         WG_ENABLED = Bukkit.getPluginManager().isPluginEnabled("WorldGuard");
+
+        if (MainConfig.voteRanksEnabled()) VoteRanks.init();
     }
 
     public static boolean isWGEnabled() {

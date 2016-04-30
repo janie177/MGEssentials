@@ -1,5 +1,6 @@
 package com.minegusta.mgessentials.command;
 
+import com.minegusta.mgessentials.data.MainConfig;
 import com.minegusta.mgessentials.votepoints.VotePointsDataManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -14,7 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 public class VoteRedeemCommand implements CommandExecutor {
-
     @Override
     public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("vote")) {
@@ -31,8 +31,11 @@ public class VoteRedeemCommand implements CommandExecutor {
                 p.sendMessage(ChatColor.YELLOW + "You redeemed a vote and you have " + ChatColor.AQUA + VotePointsDataManager.getPlayerVotes(p.getUniqueId()) + ChatColor.YELLOW + " redeems left.");
                 p.sendMessage(ChatColor.YELLOW + "You voted " + ChatColor.LIGHT_PURPLE + VotePointsDataManager.getTotalVotes(p.getUniqueId().toString()) + ChatColor.YELLOW + " times in total.");
                 p.sendMessage(ChatColor.YELLOW + "Earn more redeems at" + ChatColor.BLUE + " http://www.minegusta.net/vote.php");
-                p.getInventory().addItem(getBox());
-                p.updateInventory();
+                if (MainConfig.getIfMysteryBoxEnabled()) {
+                    p.sendMessage(ChatColor.YELLOW + "You have been given a Mystery Box!");
+                    p.getInventory().addItem(getBox());
+                    p.updateInventory();
+                }
             }
         }
         return true;

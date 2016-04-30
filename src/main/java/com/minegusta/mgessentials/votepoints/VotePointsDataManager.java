@@ -79,6 +79,7 @@ public class VotePointsDataManager {
     public static void addVote(UUID p) {
         conf.set(p.toString() + ".unclaimed", getPlayerVotes(p) + 1);
         conf.set(p.toString() + ".total", getTotalVotes(p.toString()) + 1);
+
     }
 
     public static void resetvotes(UUID p) {
