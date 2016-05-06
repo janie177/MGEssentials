@@ -94,6 +94,7 @@ public class PvpLogListener implements Listener {
 
     private void setBar(Player p) {
         if (Main.isBossbarEnabled()) {
+            BossBarAPI.removeAllBars(p);
             BossBar bar = BossBarAPI.addBar(p, new TextComponent(ChatColor.RED + "You are in combat!"), BossBarAPI.Color.RED, BossBarAPI.Style.NOTCHED_10, 1, coolDownSeconds, 20);
         }
     }
