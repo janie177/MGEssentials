@@ -35,6 +35,7 @@ public class PlayerListener implements Listener {
         if (TempData.ghostMode) {
             GhostManager.setSpook(e.getPlayer());
         }
+
     }
 
     //Cancel placing Mystery Boxes

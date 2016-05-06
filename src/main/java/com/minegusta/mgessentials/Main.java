@@ -20,6 +20,7 @@ public class Main extends JavaPlugin {
     public static Plugin PLUGIN;
     private static int SAVETASK, PARTICLETASK, COMBATTASK;
     private static boolean WG_ENABLED = false;
+    private static boolean BOSSBAR_ENABLED = false;
 
     public void onEnable() {
         //Setting the Plugin
@@ -63,6 +64,8 @@ public class Main extends JavaPlugin {
 
         WG_ENABLED = Bukkit.getPluginManager().isPluginEnabled("WorldGuard");
 
+        BOSSBAR_ENABLED = Bukkit.getPluginManager().isPluginEnabled("BossBarAPI");
+
         if (MainConfig.voteRanksEnabled()) VoteRanks.init();
     }
 
@@ -95,5 +98,9 @@ public class Main extends JavaPlugin {
         //Stop the combat task
         Bukkit.getScheduler().cancelTask(COMBATTASK);
 
+    }
+
+    public static boolean isBossbarEnabled() {
+        return BOSSBAR_ENABLED;
     }
 }

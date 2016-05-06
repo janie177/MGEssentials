@@ -1,7 +1,9 @@
 package com.minegusta.mgessentials.pvplog;
 
 import com.google.common.collect.Maps;
+import com.minegusta.mgessentials.Main;
 import com.minegusta.mgessentials.util.WGUtil;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
@@ -16,6 +18,8 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.ItemStack;
+import org.inventivetalent.bossbar.BossBar;
+import org.inventivetalent.bossbar.BossBarAPI;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -35,6 +39,8 @@ public class PvpLogListener implements Listener {
             }
             inCombat.put(e.getEntity().getUniqueId().toString(), coolDownSeconds);
             inCombat.put(e.getDamager().getUniqueId().toString(), coolDownSeconds);
+            setBar((Player) e.getEntity());
+            setBar((Player) e.getDamager());
         }
     }
 
@@ -83,6 +89,12 @@ public class PvpLogListener implements Listener {
     public void onChunkUnload(ChunkUnloadEvent e) {
         for (List<Chunk> chunks : LogData.chunkMap.values()) {
             if (chunks.contains(e.getChunk())) e.setCancelled(true);
+        }
+    }
+
+    private void setBar(Player p) {
+        if (Main.isBossbarEnabled()) {
+            BossBar bar = BossBarAPI.addBar(p, new TextComponent(ChatColor.RED + "You are in combat!"), BossBarAPI.Color.RED, BossBarAPI.Style.NOTCHED_10, 1, coolDownSeconds, 20);
         }
     }
 }
