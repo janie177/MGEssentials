@@ -98,4 +98,8 @@ public class PvpLogListener implements Listener {
             BossBar bar = BossBarAPI.addBar(p, new TextComponent(ChatColor.RED + "You are in combat!"), BossBarAPI.Color.RED, BossBarAPI.Style.NOTCHED_10, 1, coolDownSeconds, 20);
         }
     }
+
+    public static boolean isInCombat(Player p) {
+        return inCombat.containsKey(p.getUniqueId().toString());
+    }
 }
