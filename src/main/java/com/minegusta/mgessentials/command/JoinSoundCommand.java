@@ -80,7 +80,7 @@ public class JoinSoundCommand implements CommandExecutor {
             "To remove a join sound use:",
             ChatColor.RED + "/JS Remove <Player>",
             "A list of sounds can be found here:",
-            ChatColor.LIGHT_PURPLE + "http://jd.bukkit.org/beta/apidocs/org/bukkit/Sound.html"};
+            ChatColor.LIGHT_PURPLE + "https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html"};
 
     private void sendHelp(CommandSender s) {
         s.sendMessage(ChatColor.DARK_RED + " - - - " + ChatColor.LIGHT_PURPLE + "Join Sound" + ChatColor.DARK_RED + " - - - ");
