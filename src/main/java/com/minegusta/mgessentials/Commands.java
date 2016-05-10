@@ -44,6 +44,7 @@ public enum Commands {
     TIME("mytime", new TimeCommand()),
     LICK("lick", new KennonCommands()),
     ENTITIES("entities", new EntitiesCommand()),
+    WORLD("world", new WorldCommand()),
     RANDOMPSPAWN("spawnme", new RandomSpawnCommand()),
     C34("hail", new HailCommand());
 

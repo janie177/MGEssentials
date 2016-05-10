@@ -238,7 +238,16 @@ commands:
       default: false
       permission: minegusta.craft
       permission-message: Nope, no permissions for you, little one!
+   world:
+      description: Teleport between worlds.
+      usage: /Craft
+      default: false
+      permission: minegusta.world
+      permission-message: You do not have permission to use this!
 permissions:
+   minegusta.world:
+     description: Teleport across worlds.
+     default: op
    minegusta.silkspawner:
      description: Mine spawners with silk touch pickaxes.
      default: op

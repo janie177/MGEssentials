@@ -50,7 +50,7 @@ public class PlayerListener implements Listener {
 
     //Open Mystery Box and Sign commands
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onMysteryBoxOpen(PlayerInteractEvent e) {
+    public void onInteract(PlayerInteractEvent e) {
         Player player = e.getPlayer();
 
         //Spook

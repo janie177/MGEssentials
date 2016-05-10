@@ -2,6 +2,13 @@ pvpbot-enabled: false
 give-mystery-box-on-vote: false
 enable-vote-ranks: false
 
+#world:customname
+world:
+   world: 'World'
+   world_the_end: 'End'
+   world_nether: 'Nether'
+   donor: 'Donor'
+
 voteranks:
    beginner: 50
    regular: 100

@@ -1,5 +1,6 @@
 package com.minegusta.mgessentials;
 
+import com.minegusta.mgessentials.command.WorldCommand;
 import com.minegusta.mgessentials.data.MainConfig;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
 import com.minegusta.mgessentials.pvplog.LogData;
@@ -61,6 +62,9 @@ public class Main extends JavaPlugin {
             //Start the combat task
             COMBATTASK = CombatTask.start();
         }
+
+        //Init the worlds from the config
+        WorldCommand.init();
 
         WG_ENABLED = Bukkit.getPluginManager().isPluginEnabled("WorldGuard");
 
