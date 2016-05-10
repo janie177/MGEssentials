@@ -135,7 +135,8 @@ public class BlockListener implements Listener {
         if (e.getAction() == Action.PHYSICAL && e.getClickedBlock().getType().equals(Material.STONE_PLATE) && e.getPlayer().hasPermission("minegusta.launch") && e.getClickedBlock().getRelative(BlockFace.DOWN).getType().equals(Material.LAPIS_BLOCK)) {
             //It's a pressure plate and player has the perms
             Player p = e.getPlayer();
-            p.setVelocity(p.getLocation().getDirection().normalize().multiply(2.5));
+            p.teleport(p.getLocation().clone().add(0, 0.1, 0));
+            p.setVelocity(p.getLocation().getDirection().normalize().add(new Vector(0, 0.5, 0)).multiply(2.5));
             p.getWorld().playSound(p.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 1, 1);
         }
     }
