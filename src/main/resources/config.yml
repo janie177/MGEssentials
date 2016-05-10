@@ -3,7 +3,7 @@ give-mystery-box-on-vote: false
 enable-vote-ranks: false
 
 #world:customname
-world:
+worlds:
    world: 'World'
    world_the_end: 'End'
    world_nether: 'Nether'
