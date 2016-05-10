@@ -244,7 +244,16 @@ commands:
       default: false
       permission: minegusta.world
       permission-message: You do not have permission to use this!
+   hat:
+      description: Wear hats.
+      usage: /Hat
+      default: false
+      permission: minegusta.hat
+      permission-message: You do not have permission to use this!
 permissions:
+   minegusta.hat:
+     description: Equip held item as hat.
+     default: op
    minegusta.world:
      description: Teleport across worlds.
      default: op
