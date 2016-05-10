@@ -18,6 +18,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
+    public static boolean BLOCK_CHORUS_FRUIT = false;
+    public static boolean BLOCK_ALL_EXPLOSION_TERRAIN_DAMAGE = false;
     public static Plugin PLUGIN;
     private static int SAVETASK, PARTICLETASK, COMBATTASK;
     private static boolean WG_ENABLED = false;
@@ -38,6 +40,11 @@ public class Main extends JavaPlugin {
 
         //Load the joinsound file
         JoinSoundManager.createOrLoadPointsFile(PLUGIN);
+
+        //set chorus fruit
+        BLOCK_CHORUS_FRUIT = getConfig().getBoolean("block-chorus-fruit", true);
+
+        BLOCK_ALL_EXPLOSION_TERRAIN_DAMAGE = getConfig().getBoolean("block-explosion-block-damage", true);
 
         //Start the save task
         SAVETASK = SaveTask.startTask();

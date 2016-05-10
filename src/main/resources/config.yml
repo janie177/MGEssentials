@@ -1,7 +1,8 @@
 pvpbot-enabled: false
 give-mystery-box-on-vote: false
 enable-vote-ranks: false
-
+block-chorus-fruit: true
+block-explosion-block-damage: true
 #world:customname
 worlds:
    world: 'World'

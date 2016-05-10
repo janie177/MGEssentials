@@ -1,5 +1,6 @@
 package com.minegusta.mgessentials.listener;
 
+import com.minegusta.mgessentials.Main;
 import com.minegusta.mgessentials.data.TempData;
 import com.minegusta.mgessentials.ghost.GhostManager;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
@@ -11,9 +12,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Random;
@@ -37,6 +40,21 @@ public class PlayerListener implements Listener {
         }
 
     }
+
+    //Block chorus fruit teleporting
+    @EventHandler
+    public void onChorusTeleport(PlayerTeleportEvent e) {
+        if (Main.BLOCK_CHORUS_FRUIT && e.getCause() == PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT) {
+            e.setCancelled(true);
+        }
+    }
+
+    //Block end crystal block damage
+    @EventHandler
+    public void onEndCrystal(BlockExplodeEvent e) {
+        if (Main.BLOCK_ALL_EXPLOSION_TERRAIN_DAMAGE) e.setCancelled(true);
+    }
+
 
     //Cancel placing Mystery Boxes
 
