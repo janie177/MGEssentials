@@ -1,5 +1,6 @@
 package com.minegusta.mgessentials.command;
 
+import com.minegusta.mgessentials.util.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -35,7 +36,13 @@ public class RekCommand implements CommandExecutor {
     }
 
     private void rekPlayer(Player p, String sender) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "title " + p.getName() + " title " + "{text:\"You got rekt\",color:red,bold:true}");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "title " + p.getName() + " subtitle " + "{text:\"by " + sender + "\",color:gray,italic:true}");
+        Title title = new Title("You got rekt");
+        title.setSubtitle("By " + sender);
+        title.setTitleColor(ChatColor.RED);
+        title.setFadeInTime(2);
+        title.setStayTime(5);
+        title.setFadeOutTime(2);
+
+        title.send(p);
     }
 }

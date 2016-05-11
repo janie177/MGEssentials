@@ -1,5 +1,6 @@
 package com.minegusta.mgessentials.command;
 
+import com.minegusta.mgessentials.util.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -44,7 +45,13 @@ public class WarnCommand implements CommandExecutor {
     }
 
     private void warnPlayer(Player p, String message) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "title " + p.getName() + " title " + "{text:\"Warning!\",color:red,bold:true}");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "title " + p.getName() + " subtitle " + "{text:\"" + message + "\",color:gray,italic:true}");
+        Title title = new Title("WARNING!");
+        title.setSubtitle(message);
+        title.setTitleColor(ChatColor.RED);
+        title.setFadeInTime(2);
+        title.setStayTime(5);
+        title.setFadeOutTime(2);
+
+        title.send(p);
     }
 }

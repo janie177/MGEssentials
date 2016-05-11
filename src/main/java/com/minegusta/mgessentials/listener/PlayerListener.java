@@ -4,6 +4,7 @@ import com.minegusta.mgessentials.Main;
 import com.minegusta.mgessentials.data.TempData;
 import com.minegusta.mgessentials.ghost.GhostManager;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
+import com.minegusta.mgessentials.util.Title;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
@@ -30,7 +31,15 @@ public class PlayerListener implements Listener {
 
         if (e.getPlayer().hasPermission("minegusta.jointitle") && JoinSoundManager.hasJoinSound(uuid)) {
             JoinSoundManager.playSound(uuid);
-            e.setJoinMessage(JoinSoundManager.getMessage(uuid));
+            String message = JoinSoundManager.getMessage(uuid);
+            e.setJoinMessage(message);
+            if (e.getPlayer().hasPermission("minegusta.staff")) {
+                Title title = new Title(message);
+                title.setFadeInTime(1);
+                title.setStayTime(1);
+                title.setFadeOutTime(1);
+                title.broadcast();
+            }
         }
         if (TempData.massMute) e.setJoinMessage("");
 

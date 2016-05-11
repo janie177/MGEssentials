@@ -15,24 +15,27 @@ public class JoinSoundCommand implements CommandExecutor {
     public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
         if (!s.isOp() && !s.hasPermission("minegusta.joinsound")) return false;
         if (args.length > 0) {
-            if (args[0].equalsIgnoreCase("set") && args.length == 6) {
+            if (args[0].equalsIgnoreCase("set") && args.length >= 6) {
                 Player p;
                 float volume;
                 float pitch;
-                String message;
+                String message = "";
                 Sound sound;
                 try {
-                    message = args[2].replace("_", " ").replace("%and%", "||");
+                    for (int i = 2; i < args.length - 3; i++) {
+                        message = message + args[i] + " ";
+                    }
+                    message = message.replace("%and%", "||").trim();
                     p = Bukkit.getPlayer(args[1]);
-                    pitch = Float.parseFloat(args[5]);
+                    pitch = Float.parseFloat(args[args.length - 1]);
                     if (pitch < 0 || pitch > 10) {
                         pitch = 1;
                     }
-                    volume = Float.parseFloat(args[4]);
+                    volume = Float.parseFloat(args[args.length - 2]);
                     if (volume < 0 || volume > 10) {
                         pitch = 1;
                     }
-                    sound = Sound.valueOf(args[3].toUpperCase());
+                    sound = Sound.valueOf(args[args.length - 3]);
 
                 } catch (Exception ignored) {
                     s.sendMessage(ChatColor.DARK_RED + "Something was wrong with your input!");
@@ -44,10 +47,6 @@ public class JoinSoundCommand implements CommandExecutor {
                 }
                 if (p == null) {
                     s.sendMessage(ChatColor.RED + "That player is not real!");
-                    return true;
-                }
-                if (message == null) {
-                    s.sendMessage(ChatColor.RED + "That message is not in the right format it seems.");
                     return true;
                 }
                 JoinSoundManager.setSound(p.getUniqueId(), message, sound, volume, pitch);
@@ -75,12 +74,12 @@ public class JoinSoundCommand implements CommandExecutor {
 
     private String[] help = {"To set a JoinSound, use the following format:",
             ChatColor.RED + "/JS Set <Player> <Message> <Sound> <Volume> <Pitch>",
-            "Ex: " + ChatColor.RED + "/JS Set janie177 &2Jan_Is_Blind PIG_IDLE 1 1",
+            "Ex: " + ChatColor.RED + "/JS Set janie177 &2Jan Is Blind PIG_IDLE 1 1",
             ChatColor.GRAY + "The player has to be online for this to work.",
             "To remove a join sound use:",
             ChatColor.RED + "/JS Remove <Player>",
             "A list of sounds can be found here:",
-            ChatColor.LIGHT_PURPLE + "http://jd.bukkit.org/beta/apidocs/org/bukkit/Sound.html"};
+            ChatColor.LIGHT_PURPLE + "https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html"};
 
     private void sendHelp(CommandSender s) {
         s.sendMessage(ChatColor.DARK_RED + " - - - " + ChatColor.LIGHT_PURPLE + "Join Sound" + ChatColor.DARK_RED + " - - - ");
