@@ -57,7 +57,7 @@ public class VotePointsDataManager {
 
         for (String s : conf.getKeys(false)) {
             if (getTotalVotes(s) >= highest) {
-                users.add(s + ": " + highest);
+                users.add(s);
             }
         }
 
