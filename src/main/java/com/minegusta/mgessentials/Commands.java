@@ -47,6 +47,7 @@ public enum Commands {
     WORLD("world", new WorldCommand()),
     HAT("hat", new HatCommand()),
     RANDOMPSPAWN("spawnme", new RandomSpawnCommand()),
+    REMOVEITEMFRAMES("removeframes", new RemoveFrameCommand()),
     C34("hail", new HailCommand());
 
 

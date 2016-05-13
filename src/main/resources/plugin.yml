@@ -250,6 +250,10 @@ commands:
       default: false
       permission: minegusta.hat
       permission-message: You do not have permission to use this!
+   removeframes:
+      description: Remove stuck item frames in a radius of 4.
+      usage: /RemoveFrames
+      default: OP
 permissions:
    minegusta.hat:
      description: Equip held item as hat.
