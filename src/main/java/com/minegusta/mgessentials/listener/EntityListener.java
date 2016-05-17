@@ -9,6 +9,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityPortalEvent;
 
@@ -36,6 +37,15 @@ public class EntityListener implements Listener {
             entity.getWorld().spigot().playEffect(location, Effect.MAGIC_CRIT, 1, 1, 0.5F, 1F, 0.5F, 0.5F, 20, 5);
             entity.getWorld().spigot().playEffect(location, Effect.PARTICLE_SMOKE, 1, 1, 0.5F, 1F, 0.5F, 0.5F, 40, 5);
             event.setCancelled(true);
+        }
+    }
+
+
+    //Nerf spawners so they cannot crash the server
+    @EventHandler
+    public void onEntitySpawn(CreatureSpawnEvent e) {
+        if ((e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER) && e.getEntity().getWorld().getLivingEntities().stream().filter(ent -> ent.getLocation().distance(e.getEntity().getLocation()) < 30).count() > 30) {
+            e.setCancelled(true);
         }
     }
 
