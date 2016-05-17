@@ -55,7 +55,6 @@ public class EntityListener implements Listener {
     public void onPortalTravel(EntityPortalEvent e) {
         if (!(e.getEntity() instanceof Player)) {
             e.setCancelled(true);
-            e.getEntity().teleport(e.getEntity().getLocation().add(1, 0, 1));
         }
     }
 }
