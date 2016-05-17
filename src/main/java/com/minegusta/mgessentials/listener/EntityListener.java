@@ -39,6 +39,7 @@ public class EntityListener implements Listener {
         }
     }
 
+
     //Stop portal travel.
     @EventHandler
     public void onPortalTravel(EntityPortalEvent e) {
