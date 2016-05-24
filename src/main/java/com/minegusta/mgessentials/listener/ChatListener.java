@@ -37,9 +37,19 @@ public class ChatListener implements Listener {
             String message = e.getMessage();
             message = message.substring(1);
             String[] args = message.split("\\s+");
-            if (args[0].equalsIgnoreCase("hail") || args[0].equalsIgnoreCase("highfive") || args[0].equalsIgnoreCase("nuke") || args[0].equalsIgnoreCase("slap") || args[0].equalsIgnoreCase("me") || args[0].equalsIgnoreCase("bukkit") || args[0].equalsIgnoreCase("name") || args[0].equalsIgnoreCase("create")) {
+            if (args[0].equalsIgnoreCase("hail") || args[0].equalsIgnoreCase("highfive") || args[0].equalsIgnoreCase("nuke") || args[0].equalsIgnoreCase("slap") || args[0].equalsIgnoreCase("me") || args[0].equalsIgnoreCase("bukkit") || args[0].equalsIgnoreCase("mgchatstandalone") || args[0].equalsIgnoreCase("name") || args[0].equalsIgnoreCase("create")) {
                 e.getPlayer().sendMessage(ChatColor.RED + "The server is in muted mode! Only staff can talk.");
                 e.setCancelled(true);
+            }
+        }
+        String message = e.getMessage();
+        message = message.substring(1);
+        String[] args = message.split("\\s+");
+        if (args[0].equalsIgnoreCase("nick") || args[0].equalsIgnoreCase("nicknames")) {
+            if (message.toLowerCase().contains("[") || message.toLowerCase().contains("]")) {
+                e.setCancelled(true);
+                e.getPlayer().sendMessage(ChatColor.RED + "You cannot add fake tags to your name.");
+                return;
             }
         }
     }
