@@ -26,7 +26,7 @@ public class WarnCommand implements CommandExecutor {
 
             if (args[0].equals("*")) {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    warnPlayer(p, warning);
+                    warnPlayer(s, p, warning);
                 }
                 s.sendMessage(ChatColor.YELLOW + "You warned everyone.");
                 return true;
@@ -34,7 +34,7 @@ public class WarnCommand implements CommandExecutor {
             try {
                 Player victim = Bukkit.getPlayer(args[0]);
 
-                warnPlayer(victim, warning);
+                warnPlayer(s, victim, warning);
 
                 s.sendMessage(ChatColor.YELLOW + "You warned " + victim.getName() + ".");
             } catch (Exception ignored) {
@@ -44,14 +44,18 @@ public class WarnCommand implements CommandExecutor {
         return true;
     }
 
-    private void warnPlayer(Player p, String message) {
-        Title title = new Title("WARNING!");
+    private void warnPlayer(CommandSender sender, Player p, String message) {
+        Title title = new Title(ChatColor.RED + "WARNING!");
         title.setSubtitle(message);
-        title.setTitleColor(ChatColor.RED);
         title.setFadeInTime(2);
         title.setStayTime(5);
         title.setFadeOutTime(2);
 
         title.send(p);
+
+        Bukkit.getOnlinePlayers().stream().filter(pl -> pl.hasPermission("minegusta.staff")).forEach(pl -> {
+            pl.sendMessage(ChatColor.YELLOW + sender.getName() + ChatColor.LIGHT_PURPLE + " warned " + ChatColor.YELLOW + p.getName() + ChatColor.LIGHT_PURPLE + " for:");
+            pl.sendMessage(ChatColor.GRAY + " - " + message);
+        });
     }
 }
