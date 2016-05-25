@@ -48,6 +48,7 @@ public enum Commands {
     HAT("hat", new HatCommand()),
     RANDOMPSPAWN("spawnme", new RandomSpawnCommand()),
     REMOVEITEMFRAMES("removeframes", new RemoveFrameCommand()),
+    INQUISITION("inquisition", new InquisitionCommand()),
     C34("hail", new HailCommand());
 
 

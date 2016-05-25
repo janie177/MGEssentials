@@ -131,7 +131,7 @@ commands:
       description: Spark like edward in the sun.
       usage: /particle
       aliases: [particles, effects]
-      permission: minegusta.particles
+      permission: minegusta.particle
       permission-message: You don't have permission to use this. Now die in a corner.
    poke:
       description: Poke someone.
@@ -254,6 +254,10 @@ commands:
       description: Remove stuck item frames in a radius of 4.
       usage: /RemoveFrames
       default: OP
+   inquisition:
+      description: Nobody expects the spanish inquisition!
+      usage: /Inquisition
+      default: OP
 permissions:
    minegusta.hat:
      description: Equip held item as hat.
@@ -341,4 +345,7 @@ permissions:
      default: op
    minegusta.rainbowchat:
      description: Talk in rainbow using &!.
+     default: op
+   minegusta.inquisition:
+     description: Inquisition players.
      default: op
