@@ -69,24 +69,28 @@ public class InquisitionCommand implements CommandExecutor {
 				{
 					LeatherArmorMeta meta = (LeatherArmorMeta) getItemMeta();
 					meta.setColor(Color.RED);
+					setItemMeta(meta);
 				}
 			});
 			skeleton.getEquipment().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE) {
 				{
 					LeatherArmorMeta meta = (LeatherArmorMeta) getItemMeta();
 					meta.setColor(Color.RED);
+					setItemMeta(meta);
 				}
 			});
 			skeleton.getEquipment().setBoots(new ItemStack(Material.LEATHER_BOOTS) {
 				{
 					LeatherArmorMeta meta = (LeatherArmorMeta) getItemMeta();
 					meta.setColor(Color.RED);
+					setItemMeta(meta);
 				}
 			});
 			skeleton.getEquipment().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS) {
 				{
 					LeatherArmorMeta meta = (LeatherArmorMeta) getItemMeta();
 					meta.setColor(Color.RED);
+					setItemMeta(meta);
 				}
 			});
 
