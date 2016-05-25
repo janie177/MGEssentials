@@ -24,7 +24,7 @@ import java.util.Random;
 public class InquisitionCommand implements CommandExecutor {
 
 	private static final Random random = new Random();
-	private static final List<String> messages = Lists.newArrayList();
+	private static final List<String> messages = Lists.newArrayList("¡Aquí es tu muerte!", "¡Admita a tus delitos!", "¡Ve con Dios!", "¡Es el tiempo para la silla..... de las uñas!", "¡Masón! ¡Que significan los números!", "¡Para el Papa!", "¡Nosotros queremos su dinero para su vida!");
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
