@@ -195,13 +195,47 @@ public class VotePointsDataManager {
     }
 
     public static void resetvotes(UUID p) {
-        if (conf.isSet(p.toString())) {
+        if (useSQL) {
+            Connection conn = SQLUtil.openDB(url, database, user, pass);
+            if (conn != null) {
+                try {
+                    String sqlSetCredits = "REPLACE INTO " + table + " (uuid, credits, total)" +
+                            "VALUES ('" + p.toString() + "', '0', '0')";
+
+                    Statement statement = conn.createStatement();
+                    statement.execute(sqlSetCredits);
+
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (conf.isSet(p.toString())) {
             conf.set(p.toString() + ".unclaimed", 0);
             conf.set(p.toString() + ".total", 0);
         }
+
     }
 
     public static void removeUnclaimedVote(UUID p) {
-        conf.set(p.toString() + ".unclaimed", getPlayerVotes(p) - 1);
+        if (useSQL) {
+            int newTotal = getPlayerVotes(p) - 1;
+            Connection conn = SQLUtil.openDB(url, database, user, pass);
+            if (conn != null) {
+                try {
+                    String sqlSetCredits = "REPLACE INTO " + table + " (uuid, credits)" +
+                            "VALUES ('" + p.toString() + "', '" + newTotal + "')";
+
+                    Statement statement = conn.createStatement();
+                    statement.execute(sqlSetCredits);
+
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            conf.set(p.toString() + ".unclaimed", getPlayerVotes(p) - 1);
+        }
     }
 }
