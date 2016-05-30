@@ -26,7 +26,7 @@ public class VotePointsDataManager {
     private static final String url = Main.PLUGIN.getConfig().getString("database-url", "jdbc:mysql://localhost:3306/");
     private static final String table = "votepoints";
 
-    private static boolean useSQL;
+    private static boolean useSQL = false;
 
     public static boolean initSQL() {
         String tableColumns = "(uuid VARCHAR(40),votepoints INTEGER,total INTEGER, PRIMARY KEY(uuid))";
