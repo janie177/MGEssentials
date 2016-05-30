@@ -93,6 +93,13 @@ public class Main extends JavaPlugin {
         BOSSBAR_ENABLED = Bukkit.getPluginManager().isPluginEnabled("BossBarAPI");
 
         if (MainConfig.voteRanksEnabled()) VoteRanks.init();
+
+        if (getConfig().getBoolean("convert-votepoints-to-sql")) {
+            VotePointsDataManager.convertToSQL();
+            getConfig().set("convert-votepoints-to-sql", false);
+            saveConfig();
+        }
+
     }
 
     public static boolean isWGEnabled() {

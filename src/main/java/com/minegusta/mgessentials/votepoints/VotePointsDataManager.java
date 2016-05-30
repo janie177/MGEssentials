@@ -65,9 +65,9 @@ public class VotePointsDataManager {
             Connection conn = SQLUtil.openDB(url, database, user, pass);
             if (conn != null) {
                 try {
-                    String sqlGetCredits = "SELECT * FROM " + table + " WHERE uuid='" + p.toString() + "'";
+                    String sqlGetVotepoints = "SELECT * FROM " + table + " WHERE uuid='" + p.toString() + "'";
                     Statement statement = conn.createStatement();
-                    ResultSet set = statement.executeQuery(sqlGetCredits);
+                    ResultSet set = statement.executeQuery(sqlGetVotepoints);
                     while (set.next()) {
                         votepoints = set.getInt("votepoints");
                     }
@@ -88,9 +88,9 @@ public class VotePointsDataManager {
             Connection conn = SQLUtil.openDB(url, database, user, pass);
             if (conn != null) {
                 try {
-                    String sqlGetCredits = "SELECT * FROM " + table + " WHERE uuid='" + uuid + "'";
+                    String sqlGetVotepoints = "SELECT * FROM " + table + " WHERE uuid='" + uuid + "'";
                     Statement statement = conn.createStatement();
-                    ResultSet set = statement.executeQuery(sqlGetCredits);
+                    ResultSet set = statement.executeQuery(sqlGetVotepoints);
                     while (set.next()) {
                         votepoints = set.getInt("total");
                     }
@@ -111,9 +111,9 @@ public class VotePointsDataManager {
             Connection conn = SQLUtil.openDB(url, database, user, pass);
             if (conn != null) {
                 try {
-                    String sqlGetCredits = "SELECT * FROM " + table + " ORDER BY total DESC LIMIT 5";
+                    String sqlGetVotepoints = "SELECT * FROM " + table + " ORDER BY total DESC LIMIT 5";
                     Statement statement = conn.createStatement();
-                    ResultSet set = statement.executeQuery(sqlGetCredits);
+                    ResultSet set = statement.executeQuery(sqlGetVotepoints);
                     while (set.next()) {
                         users.add(set.getString("uuid"));
                     }
@@ -147,9 +147,9 @@ public class VotePointsDataManager {
             Connection conn = SQLUtil.openDB(url, database, user, pass);
             if (conn != null) {
                 try {
-                    String sqlGetCredits = "SELECT * FROM " + table + " WHERE total>" + amount;
+                    String sqlGetVotepoints = "SELECT * FROM " + table + " WHERE total>" + amount;
                     Statement statement = conn.createStatement();
-                    ResultSet set = statement.executeQuery(sqlGetCredits);
+                    ResultSet set = statement.executeQuery(sqlGetVotepoints);
                     while (set.next()) {
                         users.add(set.getString("uuid"));
                     }
@@ -173,15 +173,16 @@ public class VotePointsDataManager {
 
     public static void addVote(UUID p) {
         if (useSQL) {
-            int newTotal = getPlayerVotes(p) + 1;
+            int newAmount = getPlayerVotes(p) + 1;
+            int totalAmount = getTotalVotes(p.toString()) + 1;
             Connection conn = SQLUtil.openDB(url, database, user, pass);
             if (conn != null) {
                 try {
-                    String sqlSetCredits = "REPLACE INTO " + table + " (uuid, credits)" +
-                            "VALUES ('" + p.toString() + "', '" + newTotal + "')";
+                    String sqlSetVotepoints = "REPLACE INTO " + table + " (uuid, votepoints, total)" +
+                            "VALUES ('" + p.toString() + "', '" + newAmount + "', '" + totalAmount + "')";
 
                     Statement statement = conn.createStatement();
-                    statement.execute(sqlSetCredits);
+                    statement.execute(sqlSetVotepoints);
 
                     conn.close();
                 } catch (SQLException e) {
@@ -199,11 +200,11 @@ public class VotePointsDataManager {
             Connection conn = SQLUtil.openDB(url, database, user, pass);
             if (conn != null) {
                 try {
-                    String sqlSetCredits = "REPLACE INTO " + table + " (uuid, credits, total)" +
+                    String sqlSetVotepoints = "REPLACE INTO " + table + " (uuid, votepoints, total)" +
                             "VALUES ('" + p.toString() + "', '0', '0')";
 
                     Statement statement = conn.createStatement();
-                    statement.execute(sqlSetCredits);
+                    statement.execute(sqlSetVotepoints);
 
                     conn.close();
                 } catch (SQLException e) {
@@ -223,11 +224,11 @@ public class VotePointsDataManager {
             Connection conn = SQLUtil.openDB(url, database, user, pass);
             if (conn != null) {
                 try {
-                    String sqlSetCredits = "REPLACE INTO " + table + " (uuid, credits)" +
+                    String sqlSetVotepoints = "REPLACE INTO " + table + " (uuid, votepoints)" +
                             "VALUES ('" + p.toString() + "', '" + newTotal + "')";
 
                     Statement statement = conn.createStatement();
-                    statement.execute(sqlSetCredits);
+                    statement.execute(sqlSetVotepoints);
 
                     conn.close();
                 } catch (SQLException e) {
@@ -236,6 +237,28 @@ public class VotePointsDataManager {
             }
         } else {
             conf.set(p.toString() + ".unclaimed", getPlayerVotes(p) - 1);
+        }
+    }
+
+    public static void convertToSQL() {
+        for (String s : conf.getKeys(false)) {
+            int gotten = getTotalVotes(s);
+            if (useSQL) {
+                Connection conn = SQLUtil.openDB(url, database, user, pass);
+                if (conn != null) {
+                    try {
+                        String sqlSetVotepoints = "REPLACE INTO " + table + " (uuid, total)" +
+                                "VALUES ('" + s + "', '" + gotten + "')";
+
+                        Statement statement = conn.createStatement();
+                        statement.execute(sqlSetVotepoints);
+
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
 }
