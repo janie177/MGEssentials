@@ -243,7 +243,7 @@ public class VotePointsDataManager {
 
     public static void convertToSQL() {
         for (String s : conf.getKeys(false)) {
-            int gotten = getTotalVotes(s);
+            int gotten = conf.getInt(s + ".total", 0);
             if (useSQL) {
                 Connection conn = SQLUtil.openDB(url, database, user, pass);
                 if (conn != null) {
