@@ -94,7 +94,7 @@ public class Main extends JavaPlugin {
 
         if (MainConfig.voteRanksEnabled()) VoteRanks.init();
 
-        if (getConfig().getBoolean("convert-votepoints-to-sql")) {
+        if (getConfig().getBoolean("convert-votepoints-to-sql", true)) {
             VotePointsDataManager.convertToSQL();
             getConfig().set("convert-votepoints-to-sql", false);
             saveConfig();

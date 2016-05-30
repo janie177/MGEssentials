@@ -248,8 +248,8 @@ public class VotePointsDataManager {
                 Connection conn = SQLUtil.openDB(url, database, user, pass);
                 if (conn != null) {
                     try {
-                        String sqlSetVotepoints = "REPLACE INTO " + table + " (uuid, total)" +
-                                "VALUES ('" + s + "', '" + gotten + "')";
+                        String sqlSetVotepoints = "REPLACE INTO " + table + " (uuid, votepoints, total)" +
+                                "VALUES ('" + s + "', '0', '" + gotten + "')";
 
                         Statement statement = conn.createStatement();
                         statement.execute(sqlSetVotepoints);
