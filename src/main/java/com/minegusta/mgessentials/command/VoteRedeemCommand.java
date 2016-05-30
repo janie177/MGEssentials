@@ -32,6 +32,7 @@ public class VoteRedeemCommand implements CommandExecutor {
             } else {
                 VotePointsDataManager.removeUnclaimedVote(p.getUniqueId());
                 p.sendMessage(ChatColor.YELLOW + "You voted " + ChatColor.LIGHT_PURPLE + VotePointsDataManager.getTotalVotes(p.getUniqueId().toString()) + ChatColor.YELLOW + " times in total.");
+                p.sendMessage(ChatColor.YELLOW + "You can vote at" + ChatColor.BLUE + " http://www.minegusta.net/vote.php");
                 if (MainConfig.getIfMysteryBoxEnabled()) {
                     p.sendMessage(ChatColor.YELLOW + "You have been given a Mystery Box!");
                     p.sendMessage(ChatColor.YELLOW + "You redeemed a vote and you have " + ChatColor.AQUA + VotePointsDataManager.getPlayerVotes(p.getUniqueId()) + ChatColor.YELLOW + " redeems left.");

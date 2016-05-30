@@ -220,12 +220,13 @@ public class VotePointsDataManager {
 
     public static void removeUnclaimedVote(UUID p) {
         if (useSQL) {
-            int newTotal = getPlayerVotes(p) - 1;
+            int newPoints = getPlayerVotes(p) - 1;
+            int total = getTotalVotes(p.toString());
             Connection conn = SQLUtil.openDB(url, database, user, pass);
             if (conn != null) {
                 try {
-                    String sqlSetVotepoints = "REPLACE INTO " + table + " (uuid, votepoints)" +
-                            "VALUES ('" + p.toString() + "', '" + newTotal + "')";
+                    String sqlSetVotepoints = "REPLACE INTO " + table + " (uuid, votepoints, total)" +
+                            "VALUES ('" + p.toString() + "', '" + newPoints + "', '" + total + "')";
 
                     Statement statement = conn.createStatement();
                     statement.execute(sqlSetVotepoints);
