@@ -18,3 +18,9 @@ voteranks:
    master: 550
    tryhard: 920
    legend: 1500
+
+use-sql: false
+database-url: 'jdbc:mysql://localhost:3306/'
+password: 'meme'
+user: 'root'
+database-name: 'minegusta'

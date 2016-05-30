@@ -1,18 +1,39 @@
 package com.minegusta.mgessentials.votepoints;
 
 import com.google.common.collect.Lists;
+import com.minegusta.mgessentials.Main;
+import com.minegusta.mgessentials.util.SQLUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.UUID;
 
 public class VotePointsDataManager {
     static File file;
     static FileConfiguration conf;
+
+    private static final String database = Main.PLUGIN.getConfig().getString("database-name", "minegusta");
+    private static final String user = Main.PLUGIN.getConfig().getString("user", "root");
+    private static final String pass = Main.PLUGIN.getConfig().getString("password", "");
+    private static final String url = Main.PLUGIN.getConfig().getString("database-url", "jdbc:mysql://localhost:3306/");
+    private static final String table = "votepoints";
+
+    private static boolean useSQL;
+
+    public static boolean initSQL() {
+        String tableColumns = "(uuid VARCHAR(40),votepoints INTEGER,total INTEGER, PRIMARY KEY(uuid))";
+        boolean returned = SQLUtil.createDB(user, pass, url, database) && SQLUtil.createTable(user, pass, url, database, table, tableColumns);
+        useSQL = returned;
+        return returned;
+    }
 
     public static void createOrLoadPointsFile(Plugin p) {
         try {
@@ -39,14 +60,70 @@ public class VotePointsDataManager {
     }
 
     public static int getPlayerVotes(UUID p) {
+        if (useSQL) {
+            int votepoints = 0;
+            Connection conn = SQLUtil.openDB(url, database, user, pass);
+            if (conn != null) {
+                try {
+                    String sqlGetCredits = "SELECT * FROM " + table + " WHERE uuid='" + p.toString() + "'";
+                    Statement statement = conn.createStatement();
+                    ResultSet set = statement.executeQuery(sqlGetCredits);
+                    while (set.next()) {
+                        votepoints = set.getInt("votepoints");
+                    }
+
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return votepoints;
+        }
         return conf.getInt(p.toString() + ".unclaimed", 0);
     }
 
     public static int getTotalVotes(String uuid) {
+        if (useSQL) {
+            int votepoints = 0;
+            Connection conn = SQLUtil.openDB(url, database, user, pass);
+            if (conn != null) {
+                try {
+                    String sqlGetCredits = "SELECT * FROM " + table + " WHERE uuid='" + uuid + "'";
+                    Statement statement = conn.createStatement();
+                    ResultSet set = statement.executeQuery(sqlGetCredits);
+                    while (set.next()) {
+                        votepoints = set.getInt("total");
+                    }
+
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return votepoints;
+        }
         return conf.getInt(uuid + ".total", 0);
     }
 
     public static List<String> getMostVotes() {
+        if (useSQL) {
+            List<String> users = Lists.newArrayList();
+            Connection conn = SQLUtil.openDB(url, database, user, pass);
+            if (conn != null) {
+                try {
+                    String sqlGetCredits = "SELECT * FROM " + table + " ORDER BY total DESC LIMIT 5";
+                    Statement statement = conn.createStatement();
+                    ResultSet set = statement.executeQuery(sqlGetCredits);
+                    while (set.next()) {
+                        users.add(set.getString("uuid"));
+                    }
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return users;
+        }
         List<String> users = Lists.newArrayList();
         int highest = 0;
 
@@ -65,6 +142,24 @@ public class VotePointsDataManager {
     }
 
     public static List<String> getMoreThan(int amount) {
+        if (useSQL) {
+            List<String> users = Lists.newArrayList();
+            Connection conn = SQLUtil.openDB(url, database, user, pass);
+            if (conn != null) {
+                try {
+                    String sqlGetCredits = "SELECT * FROM " + table + " WHERE total>" + amount;
+                    Statement statement = conn.createStatement();
+                    ResultSet set = statement.executeQuery(sqlGetCredits);
+                    while (set.next()) {
+                        users.add(set.getString("uuid"));
+                    }
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return users;
+        }
         List<String> users = Lists.newArrayList();
 
         for (String s : conf.getKeys(false)) {
@@ -77,9 +172,26 @@ public class VotePointsDataManager {
 
 
     public static void addVote(UUID p) {
-        conf.set(p.toString() + ".unclaimed", getPlayerVotes(p) + 1);
-        conf.set(p.toString() + ".total", getTotalVotes(p.toString()) + 1);
+        if (useSQL) {
+            int newTotal = getPlayerVotes(p) + 1;
+            Connection conn = SQLUtil.openDB(url, database, user, pass);
+            if (conn != null) {
+                try {
+                    String sqlSetCredits = "REPLACE INTO " + table + " (uuid, credits)" +
+                            "VALUES ('" + p.toString() + "', '" + newTotal + "')";
 
+                    Statement statement = conn.createStatement();
+                    statement.execute(sqlSetCredits);
+
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            conf.set(p.toString() + ".unclaimed", getPlayerVotes(p) + 1);
+            conf.set(p.toString() + ".total", getTotalVotes(p.toString()) + 1);
+        }
     }
 
     public static void resetvotes(UUID p) {

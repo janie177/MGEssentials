@@ -13,6 +13,7 @@ import com.minegusta.mgessentials.tasks.SaveTask;
 import com.minegusta.mgessentials.votepoints.VotePointsDataManager;
 import com.minegusta.mgessentials.votepoints.VoteRanks;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,6 +21,7 @@ public class Main extends JavaPlugin {
 
     public static boolean BLOCK_CHORUS_FRUIT = false;
     public static boolean BLOCK_ALL_EXPLOSION_TERRAIN_DAMAGE = false;
+    public static boolean USESQL = false;
     public static Plugin PLUGIN;
     private static int SAVETASK, PARTICLETASK, COMBATTASK;
     private static boolean WG_ENABLED = false;
@@ -43,6 +45,19 @@ public class Main extends JavaPlugin {
 
         //set chorus fruit
         BLOCK_CHORUS_FRUIT = getConfig().getBoolean("block-chorus-fruit", true);
+
+        USESQL = getConfig().getBoolean("use-sql", false);
+
+        if (USESQL) {
+            USESQL = VotePointsDataManager.initSQL();
+        }
+
+        if (!USESQL) {
+            getLogger().info(ChatColor.RED + "- - - - - - - - - - - - - - - - - - - - - - - -");
+            getLogger().info(ChatColor.RED + "No MYSQL database connection could be made for MGEssentials.");
+            getLogger().info(ChatColor.RED + "Defaulting to flat file. BEWARE! INCONSISTENT DATA CROSS SERVER.");
+            getLogger().info(ChatColor.RED + "- - - - - - - - - - - - - - - - - - - - - - - -");
+        }
 
         BLOCK_ALL_EXPLOSION_TERRAIN_DAMAGE = getConfig().getBoolean("block-explosion-block-damage", true);
 
