@@ -39,7 +39,7 @@ public class VotePointsCommand implements CommandExecutor {
                     //Check for rank up
                     if (MainConfig.voteRanksEnabled()) {
                         int votes = VotePointsDataManager.getTotalVotes(uuid.toString());
-                        VoteRanks.checkRankUp(p, votes, votes + 1);
+                        VoteRanks.checkRankUp(p, votes, votes + 1, false);
                     }
 
                     VotePointsDataManager.addVote(uuid);

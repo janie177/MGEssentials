@@ -1,10 +1,13 @@
 package com.minegusta.mgessentials.listener;
 
 import com.minegusta.mgessentials.Main;
+import com.minegusta.mgessentials.data.MainConfig;
 import com.minegusta.mgessentials.data.TempData;
 import com.minegusta.mgessentials.ghost.GhostManager;
 import com.minegusta.mgessentials.joinsound.JoinSoundManager;
 import com.minegusta.mgessentials.util.Title;
+import com.minegusta.mgessentials.votepoints.VotePointsDataManager;
+import com.minegusta.mgessentials.votepoints.VoteRanks;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
@@ -42,6 +45,10 @@ public class PlayerListener implements Listener {
             }
         }
         if (TempData.massMute) e.setJoinMessage("");
+
+        if (MainConfig.voteRanksEnabled()) {
+            VoteRanks.applyRank(e.getPlayer(), VotePointsDataManager.getTotalVotes(e.getPlayer().getUniqueId().toString()));
+        }
 
         //Spook check (Warning, really spooky)
         if (TempData.ghostMode) {
