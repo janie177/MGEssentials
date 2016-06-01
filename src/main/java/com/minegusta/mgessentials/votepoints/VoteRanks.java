@@ -41,6 +41,7 @@ public class VoteRanks {
 
 	public static void applyRank(Player p, int votePoints) {
 		List<Integer> added = Lists.newArrayList();
+		String rankToGive = null;
 
 		for (String s : ranks.keySet()) {
 			int value = ranks.get(s);
@@ -54,17 +55,19 @@ public class VoteRanks {
 				}
 
 				if (apply) {
-					//Derank all other ranks
-					for (String s2 : ranks.keySet()) {
-						Main.PLUGIN.getServer().dispatchCommand(Main.PLUGIN.getServer().getConsoleSender(), "pex user " + p.getName() + " group remove " + s2);
-					}
-					//Add the new rank
-					Main.PLUGIN.getServer().dispatchCommand(Main.PLUGIN.getServer().getConsoleSender(), "pex user " + p.getName() + " group add " + s);
+					rankToGive = s;
 				}
-
-
+				added.add(value);
 			}
-			added.add(value);
+		}
+
+		if (rankToGive != null) {
+			//Derank all other ranks
+			for (String s2 : ranks.keySet()) {
+				Main.PLUGIN.getServer().dispatchCommand(Main.PLUGIN.getServer().getConsoleSender(), "pex user " + p.getName() + " group remove " + s2);
+			}
+			//Add the new rank
+			Main.PLUGIN.getServer().dispatchCommand(Main.PLUGIN.getServer().getConsoleSender(), "pex user " + p.getName() + " group add " + rankToGive);
 		}
 	}
 
