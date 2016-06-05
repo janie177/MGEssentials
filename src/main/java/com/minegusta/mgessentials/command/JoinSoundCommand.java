@@ -27,6 +27,12 @@ public class JoinSoundCommand implements CommandExecutor {
                     }
                     message = message.replace("%and%", "||").trim();
                     p = Bukkit.getPlayer(args[1]);
+
+                    if (!s.hasPermission("minegusta.joinsound.other") && s instanceof Player && !p.getUniqueId().toString().equalsIgnoreCase(((Player) s).getUniqueId().toString())) {
+                        s.sendMessage(ChatColor.RED + "You can only change your own Join Sound!");
+                        return true;
+                    }
+
                     pitch = Float.parseFloat(args[args.length - 1]);
                     if (pitch < 0 || pitch > 10) {
                         pitch = 1;
@@ -58,6 +64,11 @@ public class JoinSoundCommand implements CommandExecutor {
                 Player p;
                 try {
                     p = Bukkit.getPlayer(args[1]);
+
+                    if (!s.hasPermission("minegusta.joinsound.other") && s instanceof Player && !p.getUniqueId().toString().equalsIgnoreCase(((Player) s).getUniqueId().toString())) {
+                        s.sendMessage(ChatColor.RED + "You can only change your own Join Sound!");
+                        return true;
+                    }
 
                 } catch (Exception ignored) {
                     s.sendMessage(ChatColor.DARK_RED + "That player appears not to exist!");
